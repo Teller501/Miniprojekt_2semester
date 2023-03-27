@@ -1,0 +1,6 @@
+{
+	"image": "lakruzz/lamj",
+	"features": {
+		"ghcr.io/devcontainers/features/github-cli:1": {}
+	}
+}
