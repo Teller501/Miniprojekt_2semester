@@ -3,6 +3,8 @@ package dk.kea.Wishlist.controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.List;
+
 @org.springframework.stereotype.Controller
 public class Controller {
 
@@ -19,5 +21,15 @@ public class Controller {
     @GetMapping("main")
     public String main(){
         return "main";
+    }
+
+    @GetMapping("create")
+    public String create(){
+        return "create";
+    }
+
+    @GetMapping("wishlist")
+    public String wishlist(Model model){
+        return "wishlist";
     }
 }
