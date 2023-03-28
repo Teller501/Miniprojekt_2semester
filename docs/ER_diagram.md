@@ -2,30 +2,30 @@ Udkast til ER-diagram:
 
 ```sql
 
- Table users {
-  id int [PK, increment]
-  username varchar(250)
-  password varchar(250)
-  email varchar(250)
-  first_name varchar 
-  last_name varchar 
-  birthday date
+Table users {
+    id integer [PK, unique, increment]
+    username varchar(250) [unique, not null]
+    password varchar(250) [not null]
+    email varchar(250) [unique, not null]
+    first_name varchar [not null]
+    last_name varchar [not null]
+    birthday date
 }
 
-Table wishlist {
-  id int [PK, increment]
-  name varchar(250)
-  user_id int [ref: > users.id] // many-to-one
+Table wishlist{
+    id integer [PK, unique, increment]
+    name varchar(250)
+    user_id integer [ref: > users.id] // many-to-one
 }
 
-Table wish {
-  id int [PK, increment]
-  name varchar(250)
-  link varchar(2083)
-  price decimal
-  qty int
-  description nvarchar(max)
-  wishlist_id int [ref: > wishlist.id]
+Table wish{
+    id integer [PK, unique, increment]
+    name varchar(250)
+    link varchar(2083)
+    price decimal
+    qty integer
+    description nvarchar(max)
+    wishlist_id integer [ref: > wishlist.id]
 }
 ``` 
 
