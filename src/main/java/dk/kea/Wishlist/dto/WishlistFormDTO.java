@@ -3,23 +3,23 @@ package dk.kea.Wishlist.dto;
 public class WishlistFormDTO {
     private long id;
     private String name;
-    private int userID;
+    private int user_id;
 
-    public WishlistFormDTO (long id, String name, int userID) {
+    public WishlistFormDTO (long id, String name, int user_id) {
         this.id = id;
         this.name = name;
-        this.userID = userID;
+        this.user_id = user_id;
     }
 
     public WishlistFormDTO () {
     }
 
-    public int getUserID() {
-        return userID;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public String getName() {

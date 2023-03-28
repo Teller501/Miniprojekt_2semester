@@ -7,16 +7,16 @@ public class WishFormDTO {
     private double price;
     private int qty;
     private String description;
-    private int wishlistID;
+    private int wishlist_id;
 
-    public WishFormDTO (long id, String name, String link, double price, int qty, String description, int wishlistID) {
+    public WishFormDTO (long id, String name, String link, double price, int qty, String description, int wishlist_id) {
         this.id = id;
         this.name = name;
         this.link = link;
         this.price = price;
         this.qty = qty;
         this.description = description;
-        this.wishlistID = wishlistID;
+        this.wishlist_id = wishlist_id;
     }
 
     public WishFormDTO () {
@@ -70,11 +70,11 @@ public class WishFormDTO {
         this.description = description;
     }
 
-    public int getWishlistID() {
-        return wishlistID;
+    public int getWishlist_id() {
+        return wishlist_id;
     }
 
-    public void setWishlistID(int wishlistID) {
-        this.wishlistID = wishlistID;
+    public void setWishlist_id(int wishlist_id) {
+        this.wishlist_id = wishlist_id;
     }
 }
