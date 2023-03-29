@@ -75,6 +75,20 @@ public class DBRepository implements IRepository{
     }
 
     @Override
+    public void deleteUser(long userId) throws LoginSampleException {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "DELETE FROM users WHERE id = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setLong(1, userId);
+            ps.executeUpdate();
+        } catch(SQLException ex){
+            throw new LoginSampleException(ex.getMessage());
+        }
+    }
+
+
+    @Override
     public List<WishlistWishCountDTO> getWishlistAndWishCountByUserID(long userID) {
         try{
             Connection con = DBManager.getConnection();

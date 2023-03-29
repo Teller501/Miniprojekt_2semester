@@ -8,9 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class WishlistApplication {
 
 	public static void main(String[] args) {
-		testrepository test = new testrepository();
 		SpringApplication.run(WishlistApplication.class, args);
-		System.out.println(test.getTest());
 	}
-
 }

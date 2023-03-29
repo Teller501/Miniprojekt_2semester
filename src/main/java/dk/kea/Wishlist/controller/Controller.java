@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -47,6 +48,7 @@ public class Controller {
         return "register";
     }
 
+
     @PostMapping("register")
     public String register(HttpServletRequest request, @ModelAttribute UserFormDTO form) throws LoginSampleException {
         User user = repository.createUser(form);
@@ -58,6 +60,13 @@ public class Controller {
         } else {
             return "redirect:/";
         }
+    }
+
+    @PostMapping("deleteUser")
+    public String deleteUser(HttpServletRequest request, @RequestParam("userId") long userId) throws LoginSampleException {
+        repository.deleteUser(userId);
+        request.getSession().invalidate();
+        return "redirect:/";
     }
 
     @GetMapping("main")

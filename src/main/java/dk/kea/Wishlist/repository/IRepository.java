@@ -13,6 +13,9 @@ public interface IRepository {
     User login(String email, String password) throws LoginSampleException;
 
     User createUser(UserFormDTO form) throws LoginSampleException;
+
+    void deleteUser(long userId) throws LoginSampleException;
+
     List<WishlistWishCountDTO> getWishlistAndWishCountByUserID(long userID);
 
 
