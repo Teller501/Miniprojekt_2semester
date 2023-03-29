@@ -1,5 +1,8 @@
 package dk.kea.Wishlist.controller;
 
+import dk.kea.Wishlist.repository.IRepository;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -7,6 +10,12 @@ import java.util.List;
 
 @org.springframework.stereotype.Controller
 public class Controller {
+
+    IRepository repository;
+
+    public Controller(ApplicationContext context, @Value("${wishlist.repository.impl}") String impl){
+        repository = (IRepository) context.getBean(impl);
+    }
 
     @GetMapping({"/",""})
     public String index(){
