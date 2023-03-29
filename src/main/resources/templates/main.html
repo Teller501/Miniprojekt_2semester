@@ -8,13 +8,14 @@
           integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" th:href="@{/main.css}" href="/static/main.css">
+    <script th:src="@{/main.js}" src="/static/main.js"></script>
 </head>
 <body>
 
 
 <nav class="navbar sticky-lg-top  p-3">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" href="/main">
             <img src="../src/main/resources/static/images/logo.png" th:src="@{images/logo.png}" alt="Logo" width="220px"
                  class="d-inline-block align-text-top">
         </a>
@@ -36,6 +37,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/main">Home
+                            <i class="fa fa-home"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/wishlist">Your wishlists
                             <i class="fa fa-gift"></i>
                         </a>
@@ -45,6 +51,7 @@
                             <i class="fa fa-plus"></i>
                         </a>
                     </li>
+                    <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="/">Log out
                             <i class="fa fa-sign-out"></i>
                         </a>
@@ -69,13 +76,19 @@
             <div class="col-md-6 mt-5">
                 <p>Create a new wishlist for your next birthday or for Christmas:</p>
                 <a href="/create">
-                    <button class="btn btn-primary m-2">Create Wishlist</button>
+                    <button class="btn btn-primary m-2">
+                        Create Wishlist
+                        <i class="fa fa-plus"></i>
+                    </button>
                 </a>
             </div>
             <div class="col-md-6 mt-5">
                 <p>View your current wishlist, and add new wishes or edit the current ones:</p>
                 <a href="/wishlist">
-                    <button class="btn btn-primary m-2">Browse Wishlist</button>
+                    <button class="btn btn-primary m-2">
+                        Browse Wishlist
+                        <i class="fa fa-gift"></i>
+                    </button>
                 </a>
             </div>
         </div>
