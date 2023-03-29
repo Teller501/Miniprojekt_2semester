@@ -184,6 +184,24 @@ public class DBRepository implements IRepository{
     }
 
     @Override
+    public String getUsername(long userID) {
+        try{
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT username FROM users WHERE id = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setLong(1, userID);
+            ResultSet rs = ps.executeQuery();
+            String username = "";
+            while (rs.next()){
+                username = rs.getString("username");
+            }
+            return username;
+        } catch(SQLException ex){
+            return null;
+        }
+    }
+
+    @Override
     public List<WishlistWishCountDTO> getWishlistAndWishCountByUserID(long userID) {
         try{
             Connection con = DBManager.getConnection();

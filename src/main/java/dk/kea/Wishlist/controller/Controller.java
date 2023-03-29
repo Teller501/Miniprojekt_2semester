@@ -77,7 +77,18 @@ public class Controller {
 
 
     @GetMapping("main")
-    public String main(){
+    public String main(Model model, HttpServletRequest request){
+        long userID = (Long) request.getSession().getAttribute("userID");
+
+        // Redirects to login site if user is not logged in
+        if (userID == 0){
+            return "redirect:/";
+        }
+
+        // retrieves username from database and adds it to the model
+        String username = repository.getUsername(userID);
+        model.addAttribute("username", username);
+
         return "main";
     }
 

@@ -29,4 +29,6 @@ public interface IRepository {
 
     WishFormDTO createWish(WishFormDTO form, long wishlistID);
 
+    String getUsername(long userID);
+
 }
