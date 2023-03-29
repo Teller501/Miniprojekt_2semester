@@ -35,7 +35,7 @@ public class Controller {
 
         if (user != null){
             request.getSession().setAttribute("userID", user.getId());
-            return "redirect:/";
+            return "redirect:/main";
         } else {
             return "redirect:/";
         }
@@ -54,7 +54,7 @@ public class Controller {
 
         if (user != null){
             request.getSession().setAttribute("userID", user.getId());
-            return "redirect:/";
+            return "redirect:/main";
         } else {
             return "redirect:/";
         }
