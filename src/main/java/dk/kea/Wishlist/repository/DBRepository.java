@@ -1,6 +1,7 @@
 package dk.kea.Wishlist.repository;
 
 import dk.kea.Wishlist.dto.UserFormDTO;
+import dk.kea.Wishlist.dto.WishlistFormDTO;
 import dk.kea.Wishlist.dto.WishlistWishCountDTO;
 import dk.kea.Wishlist.model.User;
 import dk.kea.Wishlist.utility.DBManager;
@@ -87,6 +88,18 @@ public class DBRepository implements IRepository{
         }
     }
 
+    @Override
+    public void deleteWishlist(long id) {
+        try (Connection conn = DBManager.getConnection()){
+            String SQL = "DELETE * FROM wishlist WHERE id = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(SQL)) {
+                stmt.setLong(1, id);
+                stmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public List<WishlistWishCountDTO> getWishlistAndWishCountByUserID(long userID) {
@@ -108,4 +121,5 @@ public class DBRepository implements IRepository{
           return null;
         }
     }
+    
 }

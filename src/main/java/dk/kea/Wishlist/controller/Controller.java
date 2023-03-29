@@ -89,4 +89,11 @@ public class Controller {
 
         return "wishlist";
     }
+
+    @PostMapping ("DeleteWishlist")
+    public String deleteWishlist (HttpServletRequest request, @RequestParam("id") long id) {
+        repository.deleteWishlist(id);
+        request.getSession();
+        return "redirect:/wishlist";
+    }
 }

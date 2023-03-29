@@ -18,5 +18,7 @@ public interface IRepository {
 
     List<WishlistWishCountDTO> getWishlistAndWishCountByUserID(long userID);
 
+    void deleteWishlist(long id);
+
 
 }
