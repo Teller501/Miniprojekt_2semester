@@ -1,8 +1,10 @@
 package dk.kea.Wishlist.controller;
 
 import dk.kea.Wishlist.dto.UserFormDTO;
+import dk.kea.Wishlist.dto.WishlistFormDTO;
 import dk.kea.Wishlist.dto.WishlistWishCountDTO;
 import dk.kea.Wishlist.model.User;
+import dk.kea.Wishlist.model.Wishlist;
 import dk.kea.Wishlist.repository.IRepository;
 import dk.kea.Wishlist.utility.LoginSampleException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -75,25 +77,33 @@ public class Controller {
     }
 
     @GetMapping("create")
-    public String create(){
+    public String showCreate(){
         return "create";
     }
 
-    @GetMapping("wishlist")
-    public String showWishlist(HttpServletRequest request, Model model){
+    @PostMapping("create")
+    public String create(HttpServletRequest request, @ModelAttribute WishlistFormDTO form) {
+        long userID = (long) request.getSession().getAttribute("userID");
+        Wishlist wishlist = repository.createWishlist(form, userID);
+        System.out.println(wishlist);
+        return "redirect:/allWishlists";
+    }
+
+    @GetMapping("allWishlists")
+    public String showAllWishlist(HttpServletRequest request, Model model){
         long userID = (long) request.getSession().getAttribute("userID");
 
         List<WishlistWishCountDTO> wishlist = repository.getWishlistAndWishCountByUserID(userID);
 
         model.addAttribute("wishlist", wishlist);
 
-        return "wishlist";
+        return "allWishlists";
     }
 
     @PostMapping ("DeleteWishlist")
     public String deleteWishlist (HttpServletRequest request, @RequestParam("id") long id) {
         repository.deleteWishlist(id);
         request.getSession();
-        return "redirect:/wishlist";
+        return "redirect:/allWishlists";
     }
 }

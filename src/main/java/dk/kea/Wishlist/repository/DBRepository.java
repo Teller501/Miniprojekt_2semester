@@ -4,6 +4,7 @@ import dk.kea.Wishlist.dto.UserFormDTO;
 import dk.kea.Wishlist.dto.WishlistFormDTO;
 import dk.kea.Wishlist.dto.WishlistWishCountDTO;
 import dk.kea.Wishlist.model.User;
+import dk.kea.Wishlist.model.Wishlist;
 import dk.kea.Wishlist.utility.DBManager;
 import dk.kea.Wishlist.utility.LoginSampleException;
 import org.springframework.stereotype.Repository;
@@ -86,6 +87,28 @@ public class DBRepository implements IRepository{
         } catch(SQLException ex){
             throw new LoginSampleException(ex.getMessage());
         }
+    }
+
+    @Override
+    public Wishlist createWishlist(WishlistFormDTO form, long userID) {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "INSERT INTO wishlist (name, user_id)\n" +
+                    "VALUES  (?, ?);";
+            PreparedStatement ps = con.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
+            ps.setString(1, form.getName());
+            ps.setLong(2, userID);
+            ps.executeUpdate();
+            ResultSet ids = ps.getGeneratedKeys();
+            ids.next();
+            int id = ids.getInt(1);
+            Wishlist wishlist = new Wishlist(form.getName(), form.getUser_id());
+            wishlist.setId(id);
+            return wishlist;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override

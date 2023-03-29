@@ -1,8 +1,10 @@
 package dk.kea.Wishlist.repository;
 
 import dk.kea.Wishlist.dto.UserFormDTO;
+import dk.kea.Wishlist.dto.WishlistFormDTO;
 import dk.kea.Wishlist.dto.WishlistWishCountDTO;
 import dk.kea.Wishlist.model.User;
+import dk.kea.Wishlist.model.Wishlist;
 import dk.kea.Wishlist.utility.LoginSampleException;
 
 import java.util.List;
@@ -17,6 +19,8 @@ public interface IRepository {
     void deleteUser(long userId) throws LoginSampleException;
 
     List<WishlistWishCountDTO> getWishlistAndWishCountByUserID(long userID);
+
+    Wishlist createWishlist(WishlistFormDTO form, long userID);
 
     void deleteWishlist(long id);
 
