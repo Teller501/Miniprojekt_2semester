@@ -142,9 +142,10 @@ public class DBRepository implements IRepository{
                         String wishName = rs.getString("wish.name");
                         String link = rs.getString("link");
                         double price = rs.getDouble("price");
+                        String formattedPrice = String.format("%.2f", price).replace(".", ",");
                         int qty = rs.getInt("qty");
                         String description = rs.getString("description");
-                        WishFormDTO wish = new WishFormDTO(wishlistName, wishName, link, price, qty, description);
+                        WishFormDTO wish = new WishFormDTO(wishlistName, wishName, link, formattedPrice, qty, description);
                         wishes.add(wish);
                     }
                     return wishes;

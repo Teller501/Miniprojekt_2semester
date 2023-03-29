@@ -14,7 +14,7 @@
 <nav class="navbar sticky-lg-top  p-3">
   <div class="container-fluid">
     <a class="navbar-brand" href="/main">
-      <img src="../src/main/resources/static/images/logo.png" th:src="@{images/logo.png}" alt="Logo" width="220px"
+      <img src="../src/main/resources/static/images/logo.png" th:src="@{/images/logo.png}" alt="Logo" width="220px"
            class="d-inline-block align-text-top">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
@@ -23,7 +23,7 @@
     </button>
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
-        <img src="../src/main/resources/static/images/logo.png" th:src="@{images/logo.png}" alt="Logo"
+        <img src="../src/main/resources/static/images/logo.png" th:src="@{/images/logo.png}" alt="Logo"
              width="120px" class="d-inline-block align-text-top">
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
@@ -82,8 +82,10 @@
 
         <tr th:each="wish : ${wish}">
           <td th:text="${wish.name}"></td>
-          <td th:text="${wish.link}"></td>
-          <td th:text="${wish.price}"></td>
+          <td>
+            <a th:href="${wish.link}" target="_blank">Click here</a>
+          </td>
+          <td th:text="${wish.price} + ' kr.'"></td>
           <td th:text="${wish.description}"></td>
           <td>
             <a th:href="@{#}">
@@ -97,7 +99,8 @@
           </td>
         </tr>
       </table>
-  </div>
+
+    </div>
     <a href="/create">
       <button type="button" class="btn btn-outline-success m-2">Add a new wish</button>
     </a>

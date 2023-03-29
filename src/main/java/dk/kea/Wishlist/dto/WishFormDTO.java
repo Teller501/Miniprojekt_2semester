@@ -5,12 +5,12 @@ public class WishFormDTO {
     private long id;
     private String name;
     private String link;
-    private double price;
+    private String price;
     private int qty;
     private String description;
     private int wishlist_id;
 
-    public WishFormDTO (String listName, String name, String link, double price, int qty, String description) {
+    public WishFormDTO (String listName, String name, String link, String price, int qty, String description) {
         this.listName = listName;
         this.name = name;
         this.link = link;
@@ -54,11 +54,11 @@ public class WishFormDTO {
         this.link = link;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
