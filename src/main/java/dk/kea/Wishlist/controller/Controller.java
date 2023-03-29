@@ -26,7 +26,11 @@ public class Controller {
     }
 
     @GetMapping({"/",""})
-    public String index(){
+    public String index(HttpServletRequest request){
+        //Checking whether the user is logged in, if so, redirect to main page
+        if(request.getSession().getAttribute("userID") != null){
+            return "redirect:/main";
+        }
         return "index";
     }
 
