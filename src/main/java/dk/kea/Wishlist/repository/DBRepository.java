@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository("wishlist_DB")
@@ -75,6 +76,22 @@ public class DBRepository implements IRepository{
 
     @Override
     public List<WishlistWishCountDTO> getWishlistAndWishCountByUserID(long userID) {
-        return null;
+        try{
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT wishlist.name, COUNT(wish.id) AS wish_count FROM wishlist LEFT JOIN wish ON wishlist.id = wish.wishlist_id WHERE wishlist.user_id = ? GROUP BY wishlist.id";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setLong(1, userID);
+            ResultSet rs = ps.executeQuery();
+            List<WishlistWishCountDTO> wishlistWishCountDTOList = new ArrayList<>();
+            while (rs.next()){
+                String wishlistName = rs.getString("name");
+                int wishCount = rs.getInt("wish_count");
+                WishlistWishCountDTO wishlistWishCountDTO = new WishlistWishCountDTO(wishlistName, wishCount);
+                wishlistWishCountDTOList.add(wishlistWishCountDTO);
+            }
+            return wishlistWishCountDTOList;
+        } catch(SQLException ex){
+          return null;
+        }
     }
 }

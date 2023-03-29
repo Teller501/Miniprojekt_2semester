@@ -57,15 +57,15 @@
 <div class="container-fluid mt-5 text-center">
     <table class="table table-striped mt-5">
         <tr>
-            <th scope="col">ID</th>
             <th scope="col">Name</th>
+            <th scope="col">Number of Wishes</th>
             <th scope="col"></th>
             <th scope="col"></th>
         </tr>
 
         <tr th:each="wishlist : ${wishlist}">
-            <th scope="row" th:text="${wishlist.ID}"></th>
-            <td th:text="${wishlist.name}"></td>
+            <th scope="row" th:text="${wishlist.name}"></th>
+            <td th:text="${wishlist.wishCount}"></td>
             <td>
                 <a th:href="@{#}">
                     <button type="button" class="btn btn-outline-primary">Edit</button>
