@@ -63,11 +63,13 @@ public class Controller {
     }
 
     @PostMapping("deleteUser")
-    public String deleteUser(HttpServletRequest request, @RequestParam("userId") long userId) throws LoginSampleException {
+    public String deleteUser(HttpServletRequest request, @RequestParam("userId") long userId, Model model) throws LoginSampleException {
         repository.deleteUser(userId);
         request.getSession().invalidate();
+        model.addAttribute("userId", userId);
         return "redirect:/";
     }
+
 
     @GetMapping("main")
     public String main(){
