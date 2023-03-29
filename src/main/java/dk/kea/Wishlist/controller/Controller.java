@@ -63,7 +63,8 @@ public class Controller {
     }
 
     @PostMapping("deleteUser")
-    public String deleteUser(HttpServletRequest request, @RequestParam("userId") long userId, Model model) throws LoginSampleException {
+    public String deleteUser(HttpServletRequest request, Model model) throws LoginSampleException {
+        long userId = (long) request.getSession().getAttribute("userID");
         repository.deleteUser(userId);
         request.getSession().invalidate();
         model.addAttribute("userId", userId);

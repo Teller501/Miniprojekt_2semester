@@ -58,7 +58,7 @@
                     </li>
                     <li class="nav-item">
                         <form action="/deleteUser" method="post">
-                            <input type="hidden" name="userId" value="${userId}" th:value="${userId}"/>
+                            <input type="hidden" name="userId" th:text="${userId}"/>
                             <button type="submit" class="btn btn-danger">Delete User</button>
                         </form>
                     </li>
