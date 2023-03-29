@@ -3,10 +3,12 @@ package dk.kea.Wishlist.dto;
 public class WishlistWishCountDTO {
     private String name;
     private int wishCount;
+    private int id;
 
-    public WishlistWishCountDTO(String name, int wishCount) {
+    public WishlistWishCountDTO(String name, int wishCount, int id) {
         this.name = name;
         this.wishCount = wishCount;
+        this.id = id;
     }
 
     public String getName() {
@@ -23,5 +25,13 @@ public class WishlistWishCountDTO {
 
     public void setWishCount(int wishCount) {
         this.wishCount = wishCount;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

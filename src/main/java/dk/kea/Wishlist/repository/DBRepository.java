@@ -1,9 +1,11 @@
 package dk.kea.Wishlist.repository;
 
 import dk.kea.Wishlist.dto.UserFormDTO;
+import dk.kea.Wishlist.dto.WishFormDTO;
 import dk.kea.Wishlist.dto.WishlistFormDTO;
 import dk.kea.Wishlist.dto.WishlistWishCountDTO;
 import dk.kea.Wishlist.model.User;
+import dk.kea.Wishlist.model.Wish;
 import dk.kea.Wishlist.model.Wishlist;
 import dk.kea.Wishlist.utility.DBManager;
 import dk.kea.Wishlist.utility.LoginSampleException;
@@ -125,10 +127,37 @@ public class DBRepository implements IRepository{
     }
 
     @Override
+    public List<WishFormDTO> getWishlistByID(int wishlist_id) {
+                try{
+                    Connection con = DBManager.getConnection();
+                    String SQL = "SELECT wishlist.name, wish.name, link, price, qty, description " +
+                            "FROM wishlist LEFT JOIN wish ON wishlist.id = wish.wishlist_id " +
+                            "WHERE wishlist_id = ?;";
+                    PreparedStatement ps = con.prepareStatement(SQL);
+                    ps.setLong(1, wishlist_id);
+                    ResultSet rs = ps.executeQuery();
+                    List<WishFormDTO> wishes = new ArrayList<>();
+                    while (rs.next()){
+                        String wishlistName = rs.getString("wishlist.name");
+                        String wishName = rs.getString("wish.name");
+                        String link = rs.getString("link");
+                        double price = rs.getDouble("price");
+                        int qty = rs.getInt("qty");
+                        String description = rs.getString("description");
+                        WishFormDTO wish = new WishFormDTO(wishlistName, wishName, link, price, qty, description);
+                        wishes.add(wish);
+                    }
+                    return wishes;
+                } catch(SQLException ex){
+                    return null;
+                }
+            }
+
+    @Override
     public List<WishlistWishCountDTO> getWishlistAndWishCountByUserID(long userID) {
         try{
             Connection con = DBManager.getConnection();
-            String SQL = "SELECT wishlist.name, COUNT(wish.id) AS wish_count FROM wishlist LEFT JOIN wish ON wishlist.id = wish.wishlist_id WHERE wishlist.user_id = ? GROUP BY wishlist.id";
+            String SQL = "SELECT wishlist.name, wishlist.id, COUNT(wish.id) AS wish_count FROM wishlist LEFT JOIN wish ON wishlist.id = wish.wishlist_id WHERE wishlist.user_id = ? GROUP BY wishlist.id;";
             PreparedStatement ps = con.prepareStatement(SQL);
             ps.setLong(1, userID);
             ResultSet rs = ps.executeQuery();
@@ -136,7 +165,8 @@ public class DBRepository implements IRepository{
             while (rs.next()){
                 String wishlistName = rs.getString("name");
                 int wishCount = rs.getInt("wish_count");
-                WishlistWishCountDTO wishlistWishCountDTO = new WishlistWishCountDTO(wishlistName, wishCount);
+                int id = rs.getInt("id");
+                WishlistWishCountDTO wishlistWishCountDTO = new WishlistWishCountDTO(wishlistName, wishCount, id);
                 wishlistWishCountDTOList.add(wishlistWishCountDTO);
             }
             return wishlistWishCountDTOList;

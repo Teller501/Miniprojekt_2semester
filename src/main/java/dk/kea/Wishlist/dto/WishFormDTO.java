@@ -1,6 +1,7 @@
 package dk.kea.Wishlist.dto;
 
 public class WishFormDTO {
+    private String listName;
     private long id;
     private String name;
     private String link;
@@ -9,17 +10,24 @@ public class WishFormDTO {
     private String description;
     private int wishlist_id;
 
-    public WishFormDTO (long id, String name, String link, double price, int qty, String description, int wishlist_id) {
-        this.id = id;
+    public WishFormDTO (String listName, String name, String link, double price, int qty, String description) {
+        this.listName = listName;
         this.name = name;
         this.link = link;
         this.price = price;
         this.qty = qty;
         this.description = description;
-        this.wishlist_id = wishlist_id;
     }
 
     public WishFormDTO () {
+    }
+
+    public String getListName() {
+        return listName;
+    }
+
+    public void setListName(String listName) {
+        this.listName = listName;
     }
 
     public long getId() {

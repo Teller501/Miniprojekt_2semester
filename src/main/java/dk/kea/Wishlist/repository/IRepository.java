@@ -1,6 +1,7 @@
 package dk.kea.Wishlist.repository;
 
 import dk.kea.Wishlist.dto.UserFormDTO;
+import dk.kea.Wishlist.dto.WishFormDTO;
 import dk.kea.Wishlist.dto.WishlistFormDTO;
 import dk.kea.Wishlist.dto.WishlistWishCountDTO;
 import dk.kea.Wishlist.model.User;
@@ -25,4 +26,5 @@ public interface IRepository {
     void deleteWishlist(long id);
 
 
+    List<WishFormDTO> getWishlistByID(int id);
 }

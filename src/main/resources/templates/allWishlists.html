@@ -78,7 +78,7 @@
             <td th:text="${wishlist.name}"></td>
             <td th:text="${wishlist.wishCount}"></td>
             <td>
-                <a th:href="@{#}">
+                <a th:href="@{'/editWishlist/' + ${wishlist.id}}">
                     <button type="button" class="btn btn-outline-primary">Edit</button>
                 </a>
             </td>

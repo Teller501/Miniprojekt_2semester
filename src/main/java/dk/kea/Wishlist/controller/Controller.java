@@ -1,6 +1,7 @@
 package dk.kea.Wishlist.controller;
 
 import dk.kea.Wishlist.dto.UserFormDTO;
+import dk.kea.Wishlist.dto.WishFormDTO;
 import dk.kea.Wishlist.dto.WishlistFormDTO;
 import dk.kea.Wishlist.dto.WishlistWishCountDTO;
 import dk.kea.Wishlist.model.User;
@@ -11,10 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -106,4 +104,12 @@ public class Controller {
         request.getSession();
         return "redirect:/allWishlists";
     }
+
+    @GetMapping("/editWishlist/{id}")
+    public String showEditWishlist(@PathVariable("id") int id, Model model){
+        List<WishFormDTO> wish = repository.getWishlistByID(id);
+        model.addAttribute("wish", wish);
+        return "editWishlist";
+    }
+
 }
