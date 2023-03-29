@@ -2,9 +2,18 @@ package dk.kea.Wishlist.repository;
 
 import dk.kea.Wishlist.dto.UserFormDTO;
 import dk.kea.Wishlist.dto.WishlistWishCountDTO;
+import dk.kea.Wishlist.model.User;
+import dk.kea.Wishlist.utility.LoginSampleException;
+
+import java.util.List;
 
 public interface IRepository {
     void addUser(UserFormDTO form);
 
-    WishlistWishCountDTO getWishlistAndWishCountByUsername(String username);
+    User login(String email, String password) throws LoginSampleException;
+
+    User createUser(UserFormDTO form) throws LoginSampleException;
+    List<WishlistWishCountDTO> getWishlistAndWishCountByUserID(long userID);
+
+
 }

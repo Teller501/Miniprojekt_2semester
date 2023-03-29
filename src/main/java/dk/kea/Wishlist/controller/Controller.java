@@ -1,10 +1,17 @@
 package dk.kea.Wishlist.controller;
 
+import dk.kea.Wishlist.dto.UserFormDTO;
+import dk.kea.Wishlist.dto.WishlistWishCountDTO;
+import dk.kea.Wishlist.model.User;
 import dk.kea.Wishlist.repository.IRepository;
+import dk.kea.Wishlist.utility.LoginSampleException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -22,9 +29,35 @@ public class Controller {
         return "index";
     }
 
+    @PostMapping({"/",""})
+    public String indexPost(HttpServletRequest request, @ModelAttribute UserFormDTO form) throws LoginSampleException {
+        User user = repository.login(form.getEmail(), form.getPassword());
+
+        if (user != null){
+            request.getSession().setAttribute("userID", user.getId());
+            return "redirect:/";
+        } else {
+            return "redirect:/";
+        }
+    }
+
     @GetMapping("register")
-    public String register(){
+    public String showRegisterForm(Model model){
+        model.addAttribute("user", new UserFormDTO());
         return "register";
+    }
+
+    @PostMapping("register")
+    public String register(HttpServletRequest request, @ModelAttribute UserFormDTO form) throws LoginSampleException {
+        User user = repository.createUser(form);
+        System.out.println(user);
+
+        if (user != null){
+            request.getSession().setAttribute("userID", user.getId());
+            return "redirect:/";
+        } else {
+            return "redirect:/";
+        }
     }
 
     @GetMapping("main")
@@ -38,7 +71,13 @@ public class Controller {
     }
 
     @GetMapping("wishlist")
-    public String wishlist(Model model){
+    public String showWishlist(HttpServletRequest request, Model model){
+        long userID = (long) request.getSession().getAttribute("userID");
+
+        List<WishlistWishCountDTO> wishlist = repository.getWishlistAndWishCountByUserID(userID);
+
+        model.addAttribute("wishlist", wishlist);
+
         return "wishlist";
     }
 }

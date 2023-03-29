@@ -47,13 +47,13 @@
 <div class="container-fluid mt-5 text-center">
     <div class="container p-3 mt-4">
         <h3>Register</h3>
-        <form method="post" th:action="@{/register}">
+        <form method="post" th:action="@{/register}" th:object="${user}">
             <div class="row g-3 align-items-center m-3">
                 <div class="col-md-3">
                     <label for="inputFirstName" class="col-form-label">First Name:</label>
                 </div>
                 <div class="col-md-4">
-                    <input type="text" id="inputFirstName" class="form-control" aria-labelledby="firstNameHelpInline">
+                    <input type="text" th:field="*{firstName}" id="inputFirstName" class="form-control" aria-labelledby="firstNameHelpInline">
                 </div>
                 <div class="col-md-3">
                   <span id="firstNameHelpInline" class="form-text">
@@ -67,7 +67,7 @@
                     <label for="inputLastName" class="col-form-label">Last Name:</label>
                 </div>
                 <div class="col-md-4">
-                    <input type="text" id="inputLastName" class="form-control" aria-labelledby="lastNameHelpInline">
+                    <input type="text" th:field="*{lastName}" id="inputLastName" class="form-control" aria-labelledby="lastNameHelpInline">
                 </div>
                 <div class="col-md-3">
                   <span id="lastNameHelpInline" class="form-text">
@@ -81,7 +81,7 @@
                     <label for="inputUsername" class="col-form-label">Username:</label>
                 </div>
                 <div class="col-md-4">
-                    <input type="text" id="inputUsername" class="form-control" aria-labelledby="usernameHelpInline">
+                    <input type="text" th:field="*{username}" id="inputUsername" class="form-control" aria-labelledby="usernameHelpInline">
                 </div>
                 <div class="col-md-3">
                   <span id="usernameHelpInline" class="form-text">
@@ -95,7 +95,7 @@
                     <label for="inputPassword" class="col-form-label">Password:</label>
                 </div>
                 <div class="col-md-4">
-                    <input type="password" id="inputPassword" class="form-control" aria-labelledby="passwordHelpInline">
+                    <input type="password" th:field="*{password}" id="inputPassword" class="form-control" aria-labelledby="passwordHelpInline">
                 </div>
                 <div class="col-md-3">
                   <span id="passwordHelpInline" class="form-text">
@@ -109,7 +109,7 @@
                     <label for="inputEmail" class="col-form-label">Email:</label>
                 </div>
                 <div class="col-md-4">
-                    <input type="email" id="inputEmail" class="form-control" aria-labelledby="emailHelpInline">
+                    <input type="email" th:field="*{email}" id="inputEmail" class="form-control" aria-labelledby="emailHelpInline">
                 </div>
                 <div class="col-md-3">
                   <span id="emailHelpInline" class="form-text">
@@ -123,7 +123,7 @@
                     <label for="inputBirthday" class="col-form-label">Birthday:</label>
                 </div>
                 <div class="col-md-4">
-                    <input type="date" id="inputBirthday" class="form-control" aria-labelledby="birthdayHelpInline">
+                    <input type="date" th:field="*{birthday}" id="inputBirthday" class="form-control" aria-labelledby="birthdayHelpInline">
                 </div>
                 <div class="col-md-3">
                     <span id="birthdayHelpInline" class="form-text">
