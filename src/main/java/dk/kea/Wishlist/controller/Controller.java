@@ -112,7 +112,25 @@ public class Controller {
     public String showEditWishlist(@PathVariable("id") int id, Model model){
         List<WishFormDTO> wish = repository.getWishlistByID(id);
         model.addAttribute("wish", wish);
+        model.addAttribute("id", id);
         return "editWishlist";
     }
+
+    @GetMapping("/createWish/{id}")
+    public String showCreateWish(@PathVariable("id") int id, Model model) {
+        model.addAttribute("wishlistId", id); // Add the wishlist id as a model attribute
+        model.addAttribute("wish", new WishFormDTO());
+        return "createWish";
+    }
+
+    @PostMapping("/createWish/{id}")
+    public String createWish(@PathVariable("id") int id, @ModelAttribute WishFormDTO form) {
+        WishFormDTO wish = repository.createWish(form, id);
+        System.out.println(wish);
+        return "redirect:/allWishlists";
+    }
+
+
+
 
 }

@@ -14,7 +14,7 @@
 <nav class="navbar sticky-lg-top  p-3">
   <div class="container-fluid">
     <a class="navbar-brand" href="/main">
-      <img src="../src/main/resources/static/images/logo.png" th:src="@{/images/logo.png}" alt="Logo" width="220px"
+      <img src="../src/main/resources/static/images/logo.png" th:src="@{images/logo.png}" alt="Logo" width="220px"
            class="d-inline-block align-text-top">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
@@ -23,7 +23,7 @@
     </button>
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
-        <img src="../src/main/resources/static/images/logo.png" th:src="@{/images/logo.png}" alt="Logo"
+        <img src="../src/main/resources/static/images/logo.png" th:src="@{images/logo.png}" alt="Logo"
              width="120px" class="d-inline-block align-text-top">
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
@@ -68,43 +68,26 @@
 
 <div class="container-fluid mt-5 text-center">
   <div class="container p-3 mt-4">
-    <h3>Edit wishlist: <span th:value="${wish}"></span></h3>
-    <div class="container-fluid text-center">
-      <table class="table table-striped mt-5">
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Link</th>
-          <th scope="col">Price</th>
-          <th scope="col">Description</th>
-          <th scope="col"></th>
-          <th scope="col"></th>
-        </tr>
+    <h3>Create a new wishlist</h3>
+    <form method="post" th:action="@{'/createWish/' + ${id}}">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput" name="name" placeholder="My wishlist">
+        <label for="floatingInput">Name of the wish:</label>
+        <input type="text" class="form-control" id="linkInput" name="link" placeholder="Link to wish">
+        <label for="floatingInput">Link to the wish:</label>
+        <input type="text" class="form-control" id="priceInput" name="price" placeholder="Price">
+        <label for="floatingInput">Price:</label>
+        <input type="text" class="form-control" id="descriptionInput" name="description" placeholder="Description">
+        <label for="floatingInput">Description:</label>
+        <input type="text" class="form-control" id="qtyInput" name="link" placeholder="How many of this product?">
+        <label for="floatingInput">Amount:</label>
+      </div>
 
-        <tr th:each="wish : ${wish}">
-          <td th:text="${wish.name}"></td>
-          <td>
-            <a th:href="${wish.link}" target="_blank">Click here</a>
-          </td>
-          <td th:text="${wish.price} + ' kr.'"></td>
-          <td th:text="${wish.description}"></td>
-          <td>
-            <a th:href="@{#}">
-              <button type="button" class="btn btn-outline-primary">Edit wish</button>
-            </a>
-          </td>
-          <td>
-            <a th:href="@{#}">
-              <button type="button" class="btn btn-outline-danger">Delete wish</button>
-            </a>
-          </td>
-        </tr>
-      </table>
-
-    </div>
-    <a th:href="@{'/createWish/' + ${id}}"> <!-- Add the id to the URL -->
-      <button type="button" class="btn btn-outline-success m-2">Add a new wish</button>
-    </a>
-
+      <div class="mt-5">
+        <input type="submit" value="Create" class="btn btn-outline-success m-2"/>
+        <input type="reset" value="Reset" class="btn btn-outline-danger m-2"/>
+      </div>
+    </form>
   </div>
 </div>
 

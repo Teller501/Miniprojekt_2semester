@@ -11,7 +11,6 @@ import dk.kea.Wishlist.utility.LoginSampleException;
 import java.util.List;
 
 public interface IRepository {
-    void addUser(UserFormDTO form);
 
     User login(String email, String password) throws LoginSampleException;
 
@@ -27,4 +26,7 @@ public interface IRepository {
 
 
     List<WishFormDTO> getWishlistByID(int id);
+
+    WishFormDTO createWish(WishFormDTO form, long wishlistID);
+
 }

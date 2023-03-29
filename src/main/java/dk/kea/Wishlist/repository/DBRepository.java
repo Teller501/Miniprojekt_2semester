@@ -19,11 +19,6 @@ import java.util.List;
 @Repository("wishlist_DB")
 public class DBRepository implements IRepository{
     @Override
-    public void addUser(UserFormDTO form) {
-
-    }
-
-    @Override
     public User login(String email, String password) throws LoginSampleException {
         try{
             Connection con = DBManager.getConnection();
@@ -153,6 +148,40 @@ public class DBRepository implements IRepository{
                     return null;
                 }
             }
+
+    @Override
+    public WishFormDTO createWish(WishFormDTO form, long wishlistID) {
+        try{
+            Connection con = DBManager.getConnection();
+            String SQL = "INSERT INTO wish (name, link, price, qty, description, wishlist_id) VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = con.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
+            // setting the values of the prepared statement
+            ps.setString(1, form.getName());
+            ps.setString(2, form.getLink());
+            ps.setDouble(3, Double.parseDouble(form.getPrice().replace(",", ".")));
+            ps.setInt(4, form.getQty());
+            ps.setString(5, form.getDescription());
+            ps.setLong(6, wishlistID);
+
+            ps.executeUpdate();
+            ResultSet ids = ps.getGeneratedKeys();
+            ids.next();
+            int id = ids.getInt(1);
+
+            WishFormDTO wish = new WishFormDTO();
+            // Setting the attributes of the wish object
+            wish.setName(form.getName());
+            wish.setLink(form.getLink());
+            wish.setPrice(form.getPrice());
+            wish.setQty(form.getQty());
+            wish.setDescription(form.getDescription());
+            wish.setId(id);
+
+            return wish;
+        } catch(SQLException ex){
+            return null;
+        }
+    }
 
     @Override
     public List<WishlistWishCountDTO> getWishlistAndWishCountByUserID(long userID) {
