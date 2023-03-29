@@ -111,7 +111,7 @@ public class DBRepository implements IRepository{
     @Override
     public void deleteWishlist(long id) {
         try (Connection conn = DBManager.getConnection()){
-            String SQL = "DELETE * FROM wishlist WHERE id = ?";
+            String SQL = "DELETE FROM wishlist WHERE id = ?";
             try (PreparedStatement stmt = conn.prepareStatement(SQL)) {
                 stmt.setLong(1, id);
                 stmt.executeUpdate();

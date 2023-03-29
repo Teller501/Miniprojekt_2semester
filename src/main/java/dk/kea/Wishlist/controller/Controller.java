@@ -101,12 +101,13 @@ public class Controller {
         return "allWishlists";
     }
 
-    @PostMapping ("DeleteWishlist")
-    public String deleteWishlist (HttpServletRequest request, @RequestParam("id") long id) {
+    @GetMapping("/deleteWishlist/{id}")
+    public String deleteWishlist(@PathVariable("id") int id) {
         repository.deleteWishlist(id);
-        request.getSession();
+        System.out.println("Wishlist deleted: " + id);
         return "redirect:/allWishlists";
     }
+
 
     @GetMapping("/editWishlist/{id}")
     public String showEditWishlist(@PathVariable("id") int id, Model model){
