@@ -59,7 +59,8 @@
                     <li class="nav-item mt-5">
                         <form action="/deleteUser" method="post">
                             <input type="hidden" name="userId" th:text="${userId}"/>
-                            <button type="submit" class="btn btn-danger">Delete User</button>
+                            <button type="submit" class="btn btn-danger"
+                                    onclick="return confirm('Are you sure you want to delete this user?')">Delete User</button>
                         </form>
                     </li>
                 </ul>
