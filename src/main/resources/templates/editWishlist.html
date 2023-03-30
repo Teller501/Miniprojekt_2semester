@@ -88,13 +88,12 @@
           <td th:text="${wish.price} + ' kr.'"></td>
           <td th:text="${wish.description}"></td>
           <td>
-            <a th:href="@{#}">
-              <button type="button" class="btn btn-outline-primary">Edit wish</button>
-            </a>
+            <a th:href="@{'/editWish/' + ${wish.id}}" class="btn btn-outline-primary">Edit wish</a>
           </td>
           <td>
-            <a th:href="@{#}">
-              <button type="button" class="btn btn-outline-danger">Delete wish</button>
+            <a th:href="@{/deleteWish/{id}(id=${wish.id})}" class="btn btn-outline-danger"
+               onclick="return confirm('Are you sure you want to delete this wish?')">
+              Delete wish
             </a>
           </td>
         </tr>

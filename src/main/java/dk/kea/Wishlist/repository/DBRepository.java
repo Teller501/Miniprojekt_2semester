@@ -125,7 +125,7 @@ public class DBRepository implements IRepository{
     public List<WishFormDTO> getWishlistByID(int wishlist_id) {
                 try{
                     Connection con = DBManager.getConnection();
-                    String SQL = "SELECT wishlist.name, wish.name, link, price, qty, description " +
+                    String SQL = "SELECT wish.id, wishlist.name, wish.name, link, price, qty, description " +
                             "FROM wishlist LEFT JOIN wish ON wishlist.id = wish.wishlist_id " +
                             "WHERE wishlist_id = ?;";
                     PreparedStatement ps = con.prepareStatement(SQL);
@@ -133,6 +133,7 @@ public class DBRepository implements IRepository{
                     ResultSet rs = ps.executeQuery();
                     List<WishFormDTO> wishes = new ArrayList<>();
                     while (rs.next()){
+                        long wishID = rs.getLong("wish.id");
                         String wishlistName = rs.getString("wishlist.name");
                         String wishName = rs.getString("wish.name");
                         String link = rs.getString("link");
@@ -140,7 +141,7 @@ public class DBRepository implements IRepository{
                         String formattedPrice = String.format("%.2f", price).replace(".", ",");
                         int qty = rs.getInt("qty");
                         String description = rs.getString("description");
-                        WishFormDTO wish = new WishFormDTO(wishlistName, wishName, link, formattedPrice, qty, description);
+                        WishFormDTO wish = new WishFormDTO(wishlistName, wishID, wishName, link, formattedPrice, qty, description);
                         wishes.add(wish);
                     }
                     return wishes;
@@ -244,6 +245,19 @@ public class DBRepository implements IRepository{
             e.printStackTrace();
         }
         return updatedWishlist;
+    }
+
+    @Override
+    public void deleteWish(long id) {
+        try (Connection conn = DBManager.getConnection()){
+            String SQL = "DELETE FROM wish WHERE id = ?";
+            try (PreparedStatement stmt = conn.prepareStatement(SQL)) {
+                stmt.setLong(1, id);
+                stmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
     
 }

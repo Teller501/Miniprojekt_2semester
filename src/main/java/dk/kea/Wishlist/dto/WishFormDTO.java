@@ -10,8 +10,9 @@ public class WishFormDTO {
     private String description;
     private int wishlist_id;
 
-    public WishFormDTO (String listName, String name, String link, String price, int qty, String description) {
+    public WishFormDTO (String listName, long id, String name, String link, String price, int qty, String description) {
         this.listName = listName;
+        this.id = id;
         this.name = name;
         this.link = link;
         this.price = price;

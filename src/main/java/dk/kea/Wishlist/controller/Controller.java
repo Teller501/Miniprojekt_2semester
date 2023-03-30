@@ -143,10 +143,13 @@ public class Controller {
     public String createWish(@PathVariable("id") int id, @ModelAttribute WishFormDTO form) {
         WishFormDTO wish = repository.createWish(form, id);
         System.out.println(wish);
-        return "redirect:/allWishlists";
+        return "redirect:/editWishlist/" + id;
     }
 
-
-
-
+    @GetMapping("/deleteWish/{id}")
+    public String deleteWish(@PathVariable("id") long id) {
+        repository.deleteWish(id);
+        System.out.println("Wish deleted: " + id);
+        return "redirect:/allWishlists";
+    }
 }

@@ -78,15 +78,13 @@
             <td th:text="${wishlist.name}"></td>
             <td th:text="${wishlist.wishCount}"></td>
             <td>
-                <a th:href="@{'/editWishlist/' + ${wishlist.id}}">
-                    <button type="button" class="btn btn-outline-primary">Edit</button>
-                </a>
+                <a th:href="@{'/editWishlist/' + ${wishlist.id}}" class="btn btn-outline-primary">Edit</a>
             </td>
             <td>
-                <a th:href="@{/deleteWishlist/{id}(id=${wishlist.id})}">
-                    <button type="button" class="btn btn-outline-danger">Delete</button>
+                <a th:href="@{/deleteWishlist/{id}(id=${wishlist.id})}" class="btn btn-outline-danger"
+                   onclick="return confirm('Are you sure you want to delete this wishlist?')">
+                    Delete
                 </a>
-
             </td>
         </tr>
     </table>

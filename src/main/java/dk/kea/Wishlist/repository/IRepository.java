@@ -33,4 +33,5 @@ public interface IRepository {
 
     public List<WishFormDTO> editWishlist(long id, WishFormDTO form);
 
+    void deleteWish(long id);
 }
