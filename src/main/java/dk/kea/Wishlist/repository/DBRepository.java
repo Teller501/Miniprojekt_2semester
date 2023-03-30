@@ -222,5 +222,28 @@ public class DBRepository implements IRepository{
           return null;
         }
     }
+    @Override
+    public List<WishFormDTO> editWishlist(long id, WishFormDTO form) {
+        List<WishFormDTO> updatedWishlist = new ArrayList<>();
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "UPDATE wish SET listName=?, link=?, price=?, qty=?, description=? WHERE id=?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, form.getName());
+            ps.setString(2, form.getLink());
+            ps.setString(3, form.getPrice());
+            ps.setInt(4, form.getQty());
+            ps.setString(5, form.getDescription());
+            ps.setLong(6, id);
+            int rows = ps.executeUpdate();
+            if (rows == 1) {
+                form.setId(id);
+                updatedWishlist.add(form);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return updatedWishlist;
+    }
     
 }

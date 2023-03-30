@@ -31,4 +31,6 @@ public interface IRepository {
 
     String getUsername(long userID);
 
+    public List<WishFormDTO> editWishlist(long id, WishFormDTO form);
+
 }
