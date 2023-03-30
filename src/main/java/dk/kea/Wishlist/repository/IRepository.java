@@ -33,5 +33,7 @@ public interface IRepository {
 
     public List<WishFormDTO> editWishlist(long id, WishFormDTO form);
 
+    void editUser(UserFormDTO form) throws LoginSampleException;
+
     void deleteWish(long id);
 }
