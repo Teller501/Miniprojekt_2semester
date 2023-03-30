@@ -152,4 +152,12 @@ public class Controller {
         System.out.println("Wish deleted: " + id);
         return "redirect:/allWishlists";
     }
+
+    @PostMapping("/editUser/{id}")
+    public String editUser(HttpServletRequest request, @ModelAttribute UserFormDTO form) throws LoginSampleException {
+        long userId = (long) request.getSession().getAttribute("userID");
+        form.setId(userId);
+        repository.editUser(form);
+        return "redirect:/main";
+    }
 }

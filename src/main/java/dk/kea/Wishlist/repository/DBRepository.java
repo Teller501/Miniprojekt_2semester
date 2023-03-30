@@ -5,7 +5,6 @@ import dk.kea.Wishlist.dto.WishFormDTO;
 import dk.kea.Wishlist.dto.WishlistFormDTO;
 import dk.kea.Wishlist.dto.WishlistWishCountDTO;
 import dk.kea.Wishlist.model.User;
-import dk.kea.Wishlist.model.Wish;
 import dk.kea.Wishlist.model.Wishlist;
 import dk.kea.Wishlist.utility.DBManager;
 import dk.kea.Wishlist.utility.LoginSampleException;
@@ -246,6 +245,32 @@ public class DBRepository implements IRepository{
         }
         return updatedWishlist;
     }
+
+    @Override
+    public void editUser(UserFormDTO form) throws LoginSampleException {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "UPDATE users SET email=?, password=?, username=?, first_name=?, last_name=?, birthday=? WHERE id=?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, form.getEmail());
+            ps.setString(2, form.getPassword());
+            ps.setString(3, form.getUsername());
+            ps.setString(4, form.getFirstName());
+            ps.setString(5, form.getLastName());
+            LocalDate birthday = form.getBirthday();
+            if (birthday != null) {
+                ps.setDate(6, Date.valueOf(birthday));
+            } else {
+                ps.setNull(6, Types.DATE);
+            }
+            ps.setLong(7, form.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new LoginSampleException(e.getMessage());
+        }
+    }
+
+
 
     @Override
     public void deleteWish(long id) {
