@@ -1,13 +1,21 @@
 # Feasibilty Study
 
 ## Problem Definition
+The software project is designed to provide users with a digital wishlist service, enabling them to keep track of items they want to buy or receive as gifts. The project aims to simplify the process of creating and managing wishlists. One of the primary objectives is to make it easy for users to add items to their lists, share them with others, and receive alerts when items on the list become available or go on sale.
+
+The project has a feature that allows users to share their wishlists with family and friends. This feature can help eliminate the problem of duplicate gifts or receiving unwanted items. By providing a centralized platform for managing wishlists, the project seeks to enhance the overall gift-giving experience for both the user and the gift-giver.
+
+The software project has several advantages over traditional methods of creating and managing wishlists. With digital wishlists, users can easily add items to their lists from anywhere using their mobile devices or computers. They can also receive notifications when items on their lists become available or go on sale, making it easier to find the best deals. Additionally, users can share their wishlists with others, making it easier for friends and family to find the perfect gift.
 
 ## Information Gathering
 
 ### Problem
+The problem is that traditional wishlists can be complicated to keep track of, and also share them with family members or friends. This project strive to solve this by making a fully digital service, where you can have as many wishlist as you please, and potentially share them with family or friends via a link or mail etc.
 
 ### Market
-
+- The target users with such a service will vary, but generally speaking, it appeals to everyone that can use the internet and wants to keep track of their wishes for upcomming events and other occasions. It will both be helpful for those hosting the event, thus creating the wishlist, and those attending and giving the gifts. This is because it will be made easy to share a wishlist, and the giftgivers will be able to reserve gifts.
+- As online shopping is becoming more popular by the day, the request for being able to store wishes digitally is also growing. But there are a lot of options already out there, so the question becomes, how do we make our service more appealing than other competitors?
+- Social Media is also a big factor, as influencers and internet personalities begin to share their wishlist publically, so other people can find inspiration and create a wishlist on their own. 
 ### Competition
 <br>
 <p align="center">
