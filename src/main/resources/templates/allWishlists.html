@@ -12,6 +12,7 @@
 </head>
 <body>
 <nav class="navbar sticky-lg-top  p-3">
+    <p class="position-absolute top-0 end-0 p-1 text-muted" th:text="'Logged in as: ' + ${username}" style="font-size: small"></p>
     <div class="container-fluid">
         <a class="navbar-brand" href="/main">
             <img src="../src/main/resources/static/images/logo.png" th:src="@{images/logo.png}" alt="Logo" width="220px"
@@ -72,11 +73,17 @@
             <th scope="col">Number of Wishes</th>
             <th scope="col"></th>
             <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
 
         <tr th:each="wishlist : ${wishlist}">
             <td th:text="${wishlist.name}"></td>
             <td th:text="${wishlist.wishCount}"></td>
+            <td>
+                <a th:href="@{'/createWish/' + ${wishlist.id}}" class="btn btn-outline-success m-2">
+                    Add a new wish
+                </a>
+            </td>
             <td>
                 <a th:href="@{'/editWishlist/' + ${wishlist.id}}" class="btn btn-outline-primary">Edit</a>
             </td>
