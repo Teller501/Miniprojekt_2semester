@@ -20,6 +20,15 @@ public class WishFormDTO {
         this.description = description;
     }
 
+    public WishFormDTO(long id, String name, String link, String price, int qty, String description) {
+        this.id = id;
+        this.name = name;
+        this.link = link;
+        this.price = price;
+        this.qty = qty;
+        this.description = description;
+    }
+
     public WishFormDTO () {
     }
 

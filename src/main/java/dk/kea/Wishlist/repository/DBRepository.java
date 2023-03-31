@@ -270,7 +270,47 @@ public class DBRepository implements IRepository{
         }
     }
 
+    @Override
+    public WishFormDTO getWishByID(long wishId) {
+        try{
+            Connection con = DBManager.getConnection();
+            String SQL = "select * from wish where id = ?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setLong(1, wishId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                long wishID = rs.getLong("wish.id");
+                String wishName = rs.getString("wish.name");
+                String link = rs.getString("link");
+                double price = rs.getDouble("price");
+                String formattedPrice = String.format("%.2f", price).replace(".", ",");
+                int qty = rs.getInt("qty");
+                String description = rs.getString("description");
+                return new WishFormDTO(wishID, wishName, link, formattedPrice, qty, description);
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 
+    @Override
+    public void editWish(WishFormDTO wish){
+        String SQL = "UPDATE wish SET name=?, link=?, price=?, qty=?, description=? WHERE id=?;";
+        try (Connection conn = DBManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(SQL)) {
+            stmt.setString(1, wish.getName());
+            stmt.setString(2, wish.getLink());
+            stmt.setDouble(3, Double.parseDouble(wish.getPrice().replace(",", ".")));
+            stmt.setInt(4, wish.getQty());
+            stmt.setString(5, wish.getDescription());
+            stmt.setLong(6, wish.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     @Override
     public void deleteWish(long id) {

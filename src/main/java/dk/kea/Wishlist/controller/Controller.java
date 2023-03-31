@@ -86,14 +86,16 @@ public class Controller {
         }
 
         // retrieves username from database and adds it to the model
-        String username = repository.getUsername(userID);
-        model.addAttribute("username", username);
+        model.addAttribute("username", repository.getUsername(userID));
+        model.addAttribute("userID", userID);
 
         return "main";
     }
 
     @GetMapping("create")
-    public String showCreate(){
+    public String showCreate(HttpServletRequest request, Model model){
+        long userID = (long) request.getSession().getAttribute("userID");
+        model.addAttribute("username", repository.getUsername(userID));
         return "create";
     }
 
@@ -112,6 +114,7 @@ public class Controller {
         List<WishlistWishCountDTO> wishlist = repository.getWishlistAndWishCountByUserID(userID);
 
         model.addAttribute("wishlist", wishlist);
+        model.addAttribute("username", repository.getUsername(userID));
 
         return "allWishlists";
     }
@@ -125,17 +128,24 @@ public class Controller {
 
 
     @GetMapping("/editWishlist/{id}")
-    public String showEditWishlist(@PathVariable("id") int id, Model model){
+    public String showEditWishlist(HttpServletRequest request, @PathVariable("id") int id, Model model){
         List<WishFormDTO> wish = repository.getWishlistByID(id);
         model.addAttribute("wish", wish);
         model.addAttribute("id", id);
+        // Retrieves username from database and adds it to the model:
+        long userID = (long) request.getSession().getAttribute("userID");
+        model.addAttribute("username", repository.getUsername(userID));
+
         return "editWishlist";
     }
 
     @GetMapping("/createWish/{id}")
-    public String showCreateWish(@PathVariable("id") int id, Model model) {
+    public String showCreateWish(HttpServletRequest request, @PathVariable("id") int id, Model model) {
         model.addAttribute("wishlistId", id); // Add the wishlist id as a model attribute
         model.addAttribute("wish", new WishFormDTO());
+        // Retrieves username from database and adds it to the model:
+        long userID = (long) request.getSession().getAttribute("userID");
+        model.addAttribute("username", repository.getUsername(userID));
         return "createWish";
     }
 
@@ -159,5 +169,19 @@ public class Controller {
         form.setId(userId);
         repository.editUser(form);
         return "redirect:/main";
+    }
+
+    @GetMapping("/editWish/{id}")
+    public String showEditWish(HttpServletRequest request, @PathVariable("id") int id, Model model) {
+        long userID = (long) request.getSession().getAttribute("userID");
+        model.addAttribute("username", repository.getUsername(userID));
+        model.addAttribute("wish", repository.getWishByID(id));
+        return "editWish";
+    }
+
+    @PostMapping("/editWish")
+    public String editWish(@ModelAttribute("wish") WishFormDTO wish) {
+        repository.editWish(wish);
+        return "redirect:/allWishlists";
     }
 }

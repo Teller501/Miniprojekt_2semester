@@ -36,4 +36,8 @@ public interface IRepository {
     void editUser(UserFormDTO form) throws LoginSampleException;
 
     void deleteWish(long id);
+
+    WishFormDTO getWishByID(long id);
+
+    void editWish(WishFormDTO wish);
 }
