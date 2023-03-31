@@ -69,7 +69,7 @@
 
 <div class="container-fluid mt-5 text-center">
   <div class="container p-3 mt-4">
-    <h3>Edit wishlist: <span th:value="${wish}"></span></h3>
+    <h3 th:text="${wish.get(0).getListName()}"></h3>
     <div class="container-fluid text-center">
       <table class="table table-striped mt-5">
         <tr>
