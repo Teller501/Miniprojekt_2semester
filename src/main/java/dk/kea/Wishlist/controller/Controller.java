@@ -184,4 +184,22 @@ public class Controller {
         repository.editWish(wish);
         return "redirect:/allWishlists";
     }
+
+    @GetMapping("/viewwishlist/{id}")
+    public String viewWishlist(@PathVariable("id") int id, Model model, HttpServletRequest request) {
+        // Retrieve the wishlist from the repository using the given ID
+        List<WishFormDTO> wishlist = repository.getWishlistByID(id);
+        model.addAttribute("id", id);
+        // Retrieves username from database and adds it to the model:
+        long userID = (long) request.getSession().getAttribute("userID");
+        model.addAttribute("username", repository.getUsername(userID));
+
+        if (wishlist == null) {
+            return "error";
+        }
+
+        model.addAttribute("wishlist", wishlist);
+        return "viewwishlist";
+    }
+
 }

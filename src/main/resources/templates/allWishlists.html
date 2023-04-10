@@ -74,6 +74,7 @@
             <th scope="col"></th>
             <th scope="col"></th>
             <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
 
         <tr th:each="wishlist : ${wishlist}">
@@ -92,6 +93,9 @@
                    onclick="return confirm('Are you sure you want to delete this wishlist?')">
                     Delete
                 </a>
+            </td>
+            <td>
+                <a th:href="@{'/viewwishlist/' + ${wishlist.id}}" class="btn btn-outline-primary">View Wishes</a>
             </td>
         </tr>
     </table>
