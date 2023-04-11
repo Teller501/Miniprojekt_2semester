@@ -11,7 +11,6 @@
 	<groupId>dk.kea</groupId>
 	<artifactId>Wishlist</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
 	<name>Wishlist</name>
 	<description>Wishlist miniproject for 2nd semester</description>
 	<properties>
@@ -44,10 +43,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-    			<artifactId>maven-war-plugin</artifactId>
-    			<version>3.3.1</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
