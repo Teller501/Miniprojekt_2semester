@@ -52,7 +52,7 @@ jobs:
       run: |
         mysql -h $PLANETSCALE_DATABASE -u $PLANETSCALE_USERNAME -p$PLANETSCALE_PASSWORD -e "SELECT 'Connected to PlanetScale database'" && echo "Connection successful."
         
-    - name: Deploy application to PlanetScale
+      - name: Deploy application to PlanetScale
       env:
         PLANETSCALE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
         PLANETSCALE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
