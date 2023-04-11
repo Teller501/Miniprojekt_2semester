@@ -43,24 +43,6 @@ jobs:
         with:
           name: java-app
 
-      - name: Set up PlanetScale connection
-        env:
-          PLANETSCALE_USERNAME: ${{ secrets.DATABASE_USERNAME }}
-          PLANETSCALE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-          PLANETSCALE_ORGANIZATION: ${{ secrets.DATABASE_ORGANIZATION }}
-          PLANETSCALE_DATABASE: ${{ secrets.DATABASE_URL }}
-        run: |
-          echo "Creating SSH tunnel..."
-          ssh -o StrictHostKeyChecking=no -N -L 3306:$PLANETSCALE_DATABASE:$PLANETSCALE_DATABASE.planetscale.us planetscale@$DATABASE_ORGANIZATION.main.planetscale.com &
-          export SSHPID=$!
-          echo "Waiting for tunnel to be established..."
-          sleep 10
-          echo "Connecting to database..."
-          ls ${{ github.workspace }}/src/main/resources
-          mysql -h 127.0.0.1 -P 3306 -u $DATABASE_USERNAME -p$DATABASE_PASSWORD $PLANETSCALE_DATABASE < ${{ github.workspace }}/src/main/resources/db.sql
-          echo "Closing SSH tunnel..."
-          kill $SSHPID
-
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
