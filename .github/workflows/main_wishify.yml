@@ -56,7 +56,7 @@ jobs:
           echo "Waiting for tunnel to be established..."
           sleep 10
           echo "Connecting to database..."
-          mysql -h 127.0.0.1 -P 3306 -u $PLANETSCALE_USERNAME -p$PLANETSCALE_PASSWORD $PLANETSCALE_DATABASE < src/main/resources/db.sql
+          mysql -h 127.0.0.1 -P 3306 -u $PLANETSCALE_USERNAME -p$PLANETSCALE_PASSWORD $PLANETSCALE_DATABASE < ${{ github.workspace }}/src/main/resources/db.sql
           echo "Closing SSH tunnel..."
           kill $SSHPID
 
