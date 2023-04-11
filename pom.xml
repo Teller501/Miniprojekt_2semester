@@ -11,6 +11,7 @@
 	<groupId>dk.kea</groupId>
 	<artifactId>Wishlist</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>Wishlist</name>
 	<description>Wishlist miniproject for 2nd semester</description>
 	<properties>
