@@ -47,7 +47,7 @@ jobs:
           app-name: 'wishify'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_52765CCB6A594BBA986A5BB45D94B66F }}
-          package: 'target/*.jar'
+          package: '*.jar'
 
       - name: Run jar file
-        run: java -jar target/*.jar
+        run: java -jar *.jar
