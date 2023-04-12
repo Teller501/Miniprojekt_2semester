@@ -202,4 +202,12 @@ public class Controller {
         return "viewwishlist";
     }
 
+    @GetMapping({"profile"})
+    public String profile(Model model, HttpServletRequest request) {
+        long userID = (Long)request.getSession().getAttribute("userID");
+        model.addAttribute("username", this.repository.getUsername(userID));
+        model.addAttribute("userID", userID);
+        return "profile";
+    }
+
 }
