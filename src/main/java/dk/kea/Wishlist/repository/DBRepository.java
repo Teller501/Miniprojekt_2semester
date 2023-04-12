@@ -295,6 +295,26 @@ public class DBRepository implements IRepository{
     }
 
     @Override
+    public long getWishlistOwnerId(int wishlist_id) {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT user_id FROM wishlist WHERE id = ?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setLong(1, wishlist_id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getLong("user_id");
+            } else {
+                return -1;
+            }
+        } catch (SQLException ex) {
+            return -1;
+        }
+    }
+
+
+    @Override
     public void editWish(WishFormDTO wish){
         String SQL = "UPDATE wish SET name=?, link=?, price=?, qty=?, description=? WHERE id=?;";
         try (Connection conn = DBManager.getConnection();

@@ -187,12 +187,19 @@ public class Controller {
 
     @GetMapping("/viewwishlist/{id}")
     public String viewWishlist(@PathVariable("id") int id, Model model, HttpServletRequest request) {
-        // Retrieve the wishlist from the repository using the given ID
+        // Finds wishlist by id
         List<WishFormDTO> wishlist = repository.getWishlistByID(id);
         model.addAttribute("id", id);
-        // Retrieves username from database and adds it to the model:
+
+        // Finds username and userid
         long userID = (long) request.getSession().getAttribute("userID");
         model.addAttribute("username", repository.getUsername(userID));
+
+        // Check if correct user
+        long wishlistOwnerId = repository.getWishlistOwnerId(id);
+        if (wishlistOwnerId != userID) {
+            return "error";
+        }
 
         if (wishlist == null) {
             return "error";
@@ -201,6 +208,7 @@ public class Controller {
         model.addAttribute("wishlist", wishlist);
         return "viewwishlist";
     }
+
 
     @GetMapping({"profile"})
     public String profile(Model model, HttpServletRequest request) {

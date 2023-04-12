@@ -39,5 +39,7 @@ public interface IRepository {
 
     WishFormDTO getWishByID(long id);
 
+    long getWishlistOwnerId(int wishlist_id);
+
     void editWish(WishFormDTO wish);
 }
