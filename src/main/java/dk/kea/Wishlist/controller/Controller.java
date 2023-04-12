@@ -169,13 +169,23 @@ public class Controller {
         return "redirect:/allWishlists";
     }
 
-    @PostMapping("/editUser/{id}")
-    public String editUser(HttpServletRequest request, @ModelAttribute UserFormDTO form) throws LoginSampleException {
-        long userId = (long) request.getSession().getAttribute("userID");
-        form.setId(userId);
+    @GetMapping("/editUser")
+    public String showEditUserForm(HttpServletRequest request, Model model) {
+        long userID = (long) request.getSession().getAttribute("userID");
+        UserFormDTO userFormDTO = repository.getUserByID(userID);
+        model.addAttribute("user", userFormDTO);
+        return "editUser";
+    }
+
+    @PostMapping("/editUser")
+    public String editUser(HttpServletRequest request, @ModelAttribute UserFormDTO form) {
+        long userID = (long) request.getSession().getAttribute("userID");
+        form.setId(userID);
         repository.editUser(form);
         return "redirect:/main";
     }
+
+
 
     @GetMapping("/editWish/{id}")
     public String showEditWish(HttpServletRequest request, @PathVariable("id") int id, Model model) {

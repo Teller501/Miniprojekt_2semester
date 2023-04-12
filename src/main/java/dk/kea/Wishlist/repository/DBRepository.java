@@ -247,30 +247,6 @@ public class DBRepository implements IRepository{
     }
 
     @Override
-    public void editUser(UserFormDTO form) throws LoginSampleException {
-        try {
-            Connection con = DBManager.getConnection();
-            String SQL = "UPDATE users SET email=?, password=?, username=?, first_name=?, last_name=?, birthday=? WHERE id=?;";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setString(1, form.getEmail());
-            ps.setString(2, form.getPassword());
-            ps.setString(3, form.getUsername());
-            ps.setString(4, form.getFirstName());
-            ps.setString(5, form.getLastName());
-            LocalDate birthday = form.getBirthday();
-            if (birthday != null) {
-                ps.setDate(6, Date.valueOf(birthday));
-            } else {
-                ps.setNull(6, Types.DATE);
-            }
-            ps.setLong(7, form.getId());
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            throw new LoginSampleException(e.getMessage());
-        }
-    }
-
-    @Override
     public WishFormDTO getWishByID(long wishId) {
         try{
             Connection con = DBManager.getConnection();
@@ -292,6 +268,54 @@ public class DBRepository implements IRepository{
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public UserFormDTO getUserByID(long userID) {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "SELECT * FROM users WHERE id = ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setLong(1, userID);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String username = rs.getString("username");
+                String password = rs.getString("password");
+                String email = rs.getString("email");
+                String firstName = rs.getString("first_name");
+                String lastName = rs.getString("last_name");
+                LocalDate birthday = rs.getDate("birthday").toLocalDate();
+
+                return new UserFormDTO(userID, username, password, email, firstName, lastName, birthday);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public void editUser(UserFormDTO form) {
+        try {
+            Connection con = DBManager.getConnection();
+            String SQL = "UPDATE users SET username=?, password=?, email=?, first_name=?, last_name=?, birthday=? WHERE id=?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, form.getUsername());
+            ps.setString(2, form.getPassword());
+            ps.setString(3, form.getEmail());
+            ps.setString(4, form.getFirstName());
+            ps.setString(5, form.getLastName());
+            if (form.getBirthday() != null) {
+                ps.setDate(6, Date.valueOf(form.getBirthday()));
+            } else {
+                ps.setNull(6, Types.DATE);
+            }
+            ps.setLong(7, form.getId());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @Override
