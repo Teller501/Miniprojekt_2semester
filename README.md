@@ -11,6 +11,9 @@
   </a>
 </p>
 
+ <h4 align="center">Try the app <a href="https://wishify.azurewebsites.net/">HERE</h4></p> 
+
+
 ## Description
     
 ### Key Features    
