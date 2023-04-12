@@ -1,0 +1,14 @@
+/workspaces/Miniprojekt_2semester/src/main/java/dk/kea/Wishlist/dto/WishlistFormDTO.java
+/workspaces/Miniprojekt_2semester/src/main/java/dk/kea/Wishlist/repository/DBRepository.java
+/workspaces/Miniprojekt_2semester/src/main/java/dk/kea/Wishlist/dto/WishlistWishCountDTO.java
+/workspaces/Miniprojekt_2semester/src/main/java/dk/kea/Wishlist/model/Wish.java
+/workspaces/Miniprojekt_2semester/src/main/java/dk/kea/Wishlist/dto/WishFormDTO.java
+/workspaces/Miniprojekt_2semester/src/main/java/dk/kea/Wishlist/model/Wishlist.java
+/workspaces/Miniprojekt_2semester/src/main/java/dk/kea/Wishlist/dto/UserFormDTO.java
+/workspaces/Miniprojekt_2semester/src/main/java/dk/kea/Wishlist/repository/testrepository.java
+/workspaces/Miniprojekt_2semester/src/main/java/dk/kea/Wishlist/repository/IRepository.java
+/workspaces/Miniprojekt_2semester/src/main/java/dk/kea/Wishlist/WishlistApplication.java
+/workspaces/Miniprojekt_2semester/src/main/java/dk/kea/Wishlist/utility/DBManager.java
+/workspaces/Miniprojekt_2semester/src/main/java/dk/kea/Wishlist/model/User.java
+/workspaces/Miniprojekt_2semester/src/main/java/dk/kea/Wishlist/utility/LoginSampleException.java
+/workspaces/Miniprojekt_2semester/src/main/java/dk/kea/Wishlist/controller/Controller.java

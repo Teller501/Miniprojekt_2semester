@@ -1,0 +1,14 @@
+dk/kea/Wishlist/model/Wish.class
+dk/kea/Wishlist/utility/DBManager.class
+dk/kea/Wishlist/repository/testrepository.class
+dk/kea/Wishlist/model/Wishlist.class
+dk/kea/Wishlist/controller/Controller.class
+dk/kea/Wishlist/WishlistApplication.class
+dk/kea/Wishlist/repository/DBRepository.class
+dk/kea/Wishlist/dto/WishlistFormDTO.class
+dk/kea/Wishlist/dto/WishFormDTO.class
+dk/kea/Wishlist/model/User.class
+dk/kea/Wishlist/repository/IRepository.class
+dk/kea/Wishlist/utility/LoginSampleException.class
+dk/kea/Wishlist/dto/UserFormDTO.class
+dk/kea/Wishlist/dto/WishlistWishCountDTO.class
