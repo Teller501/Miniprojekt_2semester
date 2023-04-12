@@ -128,12 +128,18 @@ public class Controller {
 
 
     @GetMapping("/editWishlist/{id}")
-    public String showEditWishlist(HttpServletRequest request, @PathVariable("id") int id, Model model){
+    public String showEditWishlist(HttpServletRequest request, @PathVariable("id") int id, Model model) {
+        // Check if the wishlist belongs to the user
+        long userID = (long) request.getSession().getAttribute("userID");
+        long wishlistOwnerId = repository.getWishlistOwnerId(id);
+        if (wishlistOwnerId != userID) {
+            return "error";
+        }
+
         List<WishFormDTO> wish = repository.getWishlistByID(id);
         model.addAttribute("wish", wish);
         model.addAttribute("id", id);
-        // Retrieves username from database and adds it to the model:
-        long userID = (long) request.getSession().getAttribute("userID");
+
         model.addAttribute("username", repository.getUsername(userID));
 
         return "editWishlist";
