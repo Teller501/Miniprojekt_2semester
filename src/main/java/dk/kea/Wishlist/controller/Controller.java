@@ -172,8 +172,9 @@ public class Controller {
     @GetMapping("/editUser")
     public String showEditUserForm(HttpServletRequest request, Model model) {
         long userID = (long) request.getSession().getAttribute("userID");
-        UserFormDTO userFormDTO = repository.getUserByID(userID);
-        model.addAttribute("user", userFormDTO);
+        model.addAttribute("user", repository.getUserByID(userID));
+        model.addAttribute("username", repository.getUsername(userID));
+        model.addAttribute("userID", userID);
         return "editUser";
     }
 
@@ -223,22 +224,6 @@ public class Controller {
 
         model.addAttribute("wishlist", wishlist);
         return "viewwishlist";
-    }
-
-
-    @GetMapping({"profile"})
-    public String profile(Model model, HttpServletRequest request) {
-        long userID = (Long)request.getSession().getAttribute("userID");
-        model.addAttribute("username", repository.getUsername(userID));
-        model.addAttribute("userID", userID);
-        model.addAttribute("profile", repository.getUserByID(userID));
-        return "profile";
-    }
-
-    @PostMapping("/profile")
-    public String editWish(@ModelAttribute("userID") UserFormDTO user) {
-        repository.editUser(user);
-        return "redirect:/main";
     }
 
 }
