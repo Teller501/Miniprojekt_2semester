@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @org.springframework.stereotype.Controller
 public class Controller {
@@ -240,4 +241,40 @@ public class Controller {
         return "viewwishlist";
     }
 
+    @GetMapping("shareWishlist/{id}")
+    public String generateShareLink(@PathVariable("id") int id, Model model, HttpServletRequest request) {
+        // Check if the wishlist belongs to the user
+        long userID = (long) request.getSession().getAttribute("userID");
+        long wishlistOwnerId = repository.getWishlistOwnerId(id);
+        if (wishlistOwnerId != userID) {
+            return "error";
+        }
+
+        // Generate UID for share link
+        String uid = UUID.randomUUID().toString();
+
+        // Construct dynamic share link
+        String baseURL = String.format("%s://%s:%d", request.getScheme(), request.getServerName(), request.getServerPort());
+        String shareLink = String.format("%s/viewSharedWishlist?uid=%s", baseURL, uid);
+
+        model.addAttribute("shareLink", shareLink);
+        model.addAttribute("username", repository.getUsername(userID));
+
+        // Save share link to database
+        repository.createShareLink(id, uid, shareLink);
+
+        return "shareWishlist";
+    }
+
+    @GetMapping("viewSharedWishlist")
+    public String viewSharedWishlist(@RequestParam("uid") String uid, Model model) {
+        // Find wishlist by UID
+        int wishlistID = repository.getWishlistIDByUID(uid);
+        model.addAttribute("wishlistID", wishlistID);
+
+        List<WishFormDTO> wishlist = repository.getWishlistByID(wishlistID);
+        model.addAttribute("wishlist", wishlist);
+
+        return "viewSharedWishlist";
+    }
 }
