@@ -35,16 +35,22 @@ public class Controller {
     }
 
     @PostMapping({"/",""})
-    public String indexPost(HttpServletRequest request, @ModelAttribute UserFormDTO form) throws LoginSampleException {
-        User user = repository.login(form.getEmail(), form.getPassword());
+    public String indexPost(HttpServletRequest request, @ModelAttribute UserFormDTO form, Model model) {
+        // Trying to login
+        try {
+            User user = repository.login(form.getEmail(), form.getPassword());
 
-        if (user != null){
             request.getSession().setAttribute("userID", user.getId());
             return "redirect:/main";
-        } else {
-            return "redirect:/";
+
+        // if login fails, redirect to index with error message
+        } catch (LoginSampleException e) {
+            model.addAttribute("errorMessage", "An error occurred: " + e.getMessage());
+            return "index";
         }
     }
+
+
 
     @GetMapping("register")
     public String showRegisterForm(Model model){
@@ -156,11 +162,19 @@ public class Controller {
     }
 
     @PostMapping("/createWish/{id}")
-    public String createWish(@PathVariable("id") int id, @ModelAttribute WishFormDTO form) {
-        WishFormDTO wish = repository.createWish(form, id);
-        System.out.println(wish);
-        return "redirect:/editWishlist/" + id;
+    public String createWish(@PathVariable("id") int id, @ModelAttribute WishFormDTO form, Model model) {
+        try {
+            WishFormDTO wish = repository.createWish(form, id);
+            System.out.println(wish);
+            return "redirect:/editWishlist/" + id;
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("errorMessage", "An error occurred: " + e.getMessage());
+            model.addAttribute("id", id);
+            model.addAttribute("form", form);
+            return "createWish";
+        }
     }
+
 
     @GetMapping("/deleteWish/{id}")
     public String deleteWish(@PathVariable("id") long id) {

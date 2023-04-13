@@ -155,6 +155,15 @@ public class DBRepository implements IRepository{
             Connection con = DBManager.getConnection();
             String SQL = "INSERT INTO wish (name, link, price, qty, description, wishlist_id) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
+
+            if(form.getPrice() != null && Double.parseDouble(form.getPrice().replace(",", ".")) < 0){
+                throw new IllegalArgumentException("Price must be a positive number");
+            }
+
+            if(form.getQty() <= 0){
+                throw new IllegalArgumentException("Quantity must be a positive number");
+            }
+
             // setting the values of the prepared statement
             ps.setString(1, form.getName());
             ps.setString(2, form.getLink());

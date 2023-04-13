@@ -44,6 +44,11 @@
     </div>
 </nav>
 
+<!-- error message for failed login -->
+<div th:if="${errorMessage}" class="error-message">
+    <p th:text="${errorMessage}" style="color: red; font-size: 20px; font-weight: bold; text-align: center;"></p>
+</div>
+
 <div class="container-fluid mt-5 text-center">
     <div class="container p-3 mt-4">
         <h3>Login</h3>
@@ -76,7 +81,6 @@
         <p>Don't have an account? Register <a href="/register">here</a></p>
     </div>
 </div>
-
 
 <footer>
     <div class="container-fluid text-center">
