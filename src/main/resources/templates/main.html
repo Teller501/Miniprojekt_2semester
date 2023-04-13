@@ -14,7 +14,9 @@
 
 
 <nav class="navbar sticky-lg-top  p-3">
-    <p class="position-absolute top-0 end-0 p-1 text-muted" th:text="'Logged in as: ' + ${username}" style="font-size: small"></p>
+    <p class="position-absolute top-0 end-0 p-1 text-muted" style="font-size: small">Logged in as:
+        <a href="/profile" th:text="' '+${username}"></a>
+    </p>
     <div class="container-fluid">
         <a class="navbar-brand" href="/main">
             <img src="../src/main/resources/static/images/logo.png" th:src="@{images/logo.png}" alt="Logo" width="220px"
