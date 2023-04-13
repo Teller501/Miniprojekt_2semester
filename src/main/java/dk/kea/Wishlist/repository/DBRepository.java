@@ -285,9 +285,9 @@ public class DBRepository implements IRepository{
                 String email = rs.getString("email");
                 String firstName = rs.getString("first_name");
                 String lastName = rs.getString("last_name");
-                LocalDate birthday = rs.getDate("birthday").toLocalDate();
+                Date birthday = rs.getDate("birthday");
 
-                return new UserFormDTO(userID, username, password, email, firstName, lastName, birthday);
+                return new UserFormDTO(userID, username, password, email, firstName, lastName, birthday.toLocalDate());
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -299,21 +299,34 @@ public class DBRepository implements IRepository{
     public void editUser(UserFormDTO form) {
         try {
             Connection con = DBManager.getConnection();
-            String SQL = "UPDATE users SET username=?, password=?, email=?, first_name=?, last_name=?, birthday=? WHERE id=?";
-            PreparedStatement ps = con.prepareStatement(SQL);
-            ps.setString(1, form.getUsername());
-            ps.setString(2, form.getPassword());
-            ps.setString(3, form.getEmail());
-            ps.setString(4, form.getFirstName());
-            ps.setString(5, form.getLastName());
-            if (form.getBirthday() != null) {
-                ps.setDate(6, Date.valueOf(form.getBirthday()));
+            String SQL = "SELECT birthday FROM users WHERE id=?";
+            PreparedStatement psSelect = con.prepareStatement(SQL);
+            psSelect.setLong(1, form.getId());
+            ResultSet rs = psSelect.executeQuery();
+            if (rs.next()) {
+                Date originalBirthday = rs.getDate("birthday");
+                rs.close();
+                String updateSQL = "UPDATE users SET username=?, password=?, email=?, first_name=?, last_name=?, birthday=? WHERE id=?";
+                PreparedStatement psUpdate = con.prepareStatement(updateSQL);
+                psUpdate.setString(1, form.getUsername());
+                psUpdate.setString(2, form.getPassword());
+                psUpdate.setString(3, form.getEmail());
+                psUpdate.setString(4, form.getFirstName());
+                psUpdate.setString(5, form.getLastName());
+                if (form.getBirthday() != null) {
+                    psUpdate.setDate(6, Date.valueOf(form.getBirthday()));
+                } else {
+                    psUpdate.setDate(6, originalBirthday); // Use original value if form.getBirthday() is null
+                }
+                psUpdate.setLong(7, form.getId());
+                psUpdate.executeUpdate();
+                psUpdate.close();
             } else {
-                ps.setNull(6, Types.DATE);
+                rs.close();
+                // Handle the case where the user with the given ID is not found in the database
+                System.out.println("User with ID " + form.getId() + " not found in the database.");
             }
-            ps.setLong(7, form.getId());
-            ps.executeUpdate();
-        } catch (SQLException ex) {
+        } catch (SQLException | NullPointerException ex) {
             ex.printStackTrace();
         }
     }

@@ -229,9 +229,16 @@ public class Controller {
     @GetMapping({"profile"})
     public String profile(Model model, HttpServletRequest request) {
         long userID = (Long)request.getSession().getAttribute("userID");
-        model.addAttribute("username", this.repository.getUsername(userID));
+        model.addAttribute("username", repository.getUsername(userID));
         model.addAttribute("userID", userID);
+        model.addAttribute("profile", repository.getUserByID(userID));
         return "profile";
+    }
+
+    @PostMapping("/profile")
+    public String editWish(@ModelAttribute("userID") UserFormDTO user) {
+        repository.editUser(user);
+        return "redirect:/main";
     }
 
 }
