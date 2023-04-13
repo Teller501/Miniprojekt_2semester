@@ -10,28 +10,48 @@
 </head>
 <body>
 <nav class="navbar sticky-lg-top  p-3">
+  <p class="position-absolute top-0 end-0 p-1 text-muted" style="font-size: small">Logged in as:
+    <a href="/editUser" th:text="' '+${username}"></a>
+  </p>
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">
-      <img src="../src/main/resources/static/images/logo.png" th:src="@{images/logo.png}" alt="Logo" width="220px" class="d-inline-block align-text-top">
+    <a class="navbar-brand" href="/main">
+      <img src="../src/main/resources/static/images/logo.png" th:src="@{images/logo.png}" alt="Logo" width="220px"
+           class="d-inline-block align-text-top">
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+            aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-      <div class="offcanvas-header">
-        <img src="../src/main/resources/static/images/logo.png" th:src="@{images/logo.png}" alt="Logo" width="120px" class="d-inline-block align-text-top">
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
+    <div class="offcanvas offcanvas-end offcanvas-animation" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">            <div class="offcanvas-header">
+      <img src="../src/main/resources/static/images/logo.png" th:src="@{images/logo.png}" alt="Logo"
+           width="120px" class="d-inline-block align-text-top">
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active nav-link-hover" aria-current="page" href="/">Log in
-              <i class="fa fa-sign-in"></i>
+            <a class="nav-link active nav-link-hover" aria-current="page" href="/editUser">Profile
+              <i class="fa fa-child"></i>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/register">Register
-              <i class="fa fa-user"></i>
+            <a class="nav-link active nav-link-hover" aria-current="page" href="/main">Home
+              <i class="fa fa-home"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active nav-link-hover" aria-current="page" href="/allWishlists">Your wishlists
+              <i class="fa fa-gift"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active nav-link-hover" aria-current="page" href="/create">Create wishlist
+              <i class="fa fa-plus"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active nav-link-hover" aria-current="page" href="/">Log out
+              <i class="fa fa-sign-out"></i>
             </a>
           </li>
         </ul>
