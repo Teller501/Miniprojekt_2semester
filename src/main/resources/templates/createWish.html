@@ -67,6 +67,10 @@
     </button>
 </div>
 
+<div th:if="${errorMessage}" class="error-message">
+    <p th:text="${errorMessage}" style="color: red; font-size: 20px; font-weight: bold; text-align: center;"></p>
+</div>
+
 <div class="container-fluid mt-5 text-center">
     <div class="container p-3 mt-4">
         <h3>Add a new wish</h3>
