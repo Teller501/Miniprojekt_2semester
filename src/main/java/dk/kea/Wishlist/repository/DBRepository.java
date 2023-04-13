@@ -379,6 +379,39 @@ public class DBRepository implements IRepository{
     }
 
     @Override
+    public void createShareLink(int id, String uid, String shareLink) {
+        try(Connection con = DBManager.getConnection()){
+            String SQL = "INSERT INTO shared_wishlist (uid, wishlist_id, link) VALUES (?, ?, ?);";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, uid);
+            ps.setInt(2, id);
+            ps.setString(3, shareLink);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public int getWishlistIDByUID(String uid) {
+        try(Connection con = DBManager.getConnection()){
+            String SQL = "SELECT wishlist_id FROM shared_wishlist WHERE uid = ?;";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setString(1, uid);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("wishlist_id");
+            } else {
+                return -1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+
+    @Override
     public void deleteWish(long id) {
         try (Connection conn = DBManager.getConnection()){
             String SQL = "DELETE FROM wish WHERE id = ?";
