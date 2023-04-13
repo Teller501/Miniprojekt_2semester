@@ -160,7 +160,7 @@ public class DBRepository implements IRepository{
                 throw new IllegalArgumentException("Price must be a positive number");
             }
 
-            if(form.getQty() <= 0){
+            if(form.getQty() < 0){
                 throw new IllegalArgumentException("Quantity must be a positive number");
             }
 
