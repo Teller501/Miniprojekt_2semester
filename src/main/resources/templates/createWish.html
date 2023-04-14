@@ -76,20 +76,20 @@
         <h3>Add a new wish</h3>
         <form method="post" th:action="@{'/createWish/' + ${id}}">
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput" name="name" placeholder="My wishlist">
-            <label for="floatingInput">Name of the wish:</label>
+            <input type="text" class="form-control" id="nameInput" name="name" placeholder="My wishlist">
+            <label for="nameInput">Name of the wish:</label>
           </div>
           <div class="form-floating mb-3">
             <input type="text" class="form-control" id="linkInput" name="link" placeholder="Link to wish">
-            <label for="floatingInput">Link to the wish:</label>
+            <label for="linkInput">Link to the wish:</label>
           </div>
           <div class="form-floating mb-3">
             <input type="text" class="form-control" id="priceInput" name="price" placeholder="Price">
-            <label for="floatingInput">Price:</label>
+            <label for="priceInput">Price:</label>
           </div>
           <div class="form-floating mb-3">
             <input type="text" class="form-control" id="descriptionInput" name="description" placeholder="Description">
-            <label for="floatingInput">Description:</label>
+            <label for="descriptionInput">Description:</label>
           </div>
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="qtyInput" name="qty" placeholder="How many of this product?">

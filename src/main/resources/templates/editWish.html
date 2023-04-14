@@ -74,24 +74,24 @@
     <form method="post" th:action="@{/editWish}" th:object="${wish}">
         <input type="hidden" th:field="*{id}"/>
       <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="floatingInput" name="name" th:value="*{name}">
-        <label for="floatingInput">Name of the wish:</label>
+        <input type="text" class="form-control" id="nameInput" name="name" th:value="*{name}">
+        <label for="nameInput">Name of the wish:</label>
       </div>
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="linkInput" name="link" th:value="*{link}">
-        <label for="floatingInput">Link to the wish:</label>
+        <label for="linkInput">Link to the wish:</label>
       </div>
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="priceInput" name="price" th:value="*{price}">
-        <label for="floatingInput">Price:</label>
+        <label for="priceInput">Price:</label>
       </div>
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="descriptionInput" name="description" th:value="*{description}">
-        <label for="floatingInput">Description:</label>
+        <label for="descriptionInput">Description:</label>
       </div>
       <div class="form-floating mb-3">
         <input type="text" class="form-control" id="qtyInput" name="link" th:value="*{qty}">
-        <label for="floatingInput">Amount:</label>
+        <label for="qtyInput">Amount:</label>
       </div>
 
       <div class="mt-5">
