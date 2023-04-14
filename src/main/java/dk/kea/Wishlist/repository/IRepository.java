@@ -5,6 +5,7 @@ import dk.kea.Wishlist.dto.WishFormDTO;
 import dk.kea.Wishlist.dto.WishlistFormDTO;
 import dk.kea.Wishlist.dto.WishlistWishCountDTO;
 import dk.kea.Wishlist.model.User;
+import dk.kea.Wishlist.model.Wish;
 import dk.kea.Wishlist.model.Wishlist;
 import dk.kea.Wishlist.utility.LoginSampleException;
 
@@ -49,5 +50,7 @@ public interface IRepository {
 
 
     int getWishlistIDByUID(String uid);
+
+    List<Long> findWishlistIDsByUserIDAndWishName(long userID, String searchTerm);
 
 }

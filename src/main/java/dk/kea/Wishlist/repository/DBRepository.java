@@ -5,6 +5,7 @@ import dk.kea.Wishlist.dto.WishFormDTO;
 import dk.kea.Wishlist.dto.WishlistFormDTO;
 import dk.kea.Wishlist.dto.WishlistWishCountDTO;
 import dk.kea.Wishlist.model.User;
+import dk.kea.Wishlist.model.Wish;
 import dk.kea.Wishlist.model.Wishlist;
 import dk.kea.Wishlist.utility.DBManager;
 import dk.kea.Wishlist.utility.LoginSampleException;
@@ -409,6 +410,28 @@ public class DBRepository implements IRepository{
             return -1;
         }
     }
+
+    @Override
+    public List<Long> findWishlistIDsByUserIDAndWishName(long userID, String searchTerm) {
+        try(Connection con = DBManager.getConnection()){
+            String SQL = "SELECT w.wishlist_id FROM wish w JOIN wishlist wi ON w.wishlist_id = wi.id WHERE wi.user_id = ? AND w.name LIKE ?";
+            PreparedStatement ps = con.prepareStatement(SQL);
+            ps.setLong(1, userID);
+            ps.setString(2, "%" + searchTerm + "%");
+            ResultSet rs = ps.executeQuery();
+            List<Long> wishlistIDs = new ArrayList<>();
+            while (rs.next()) {
+                long wishlistID = rs.getLong("wishlist_id");
+                wishlistIDs.add(wishlistID);
+            }
+            return wishlistIDs;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
 
 
     @Override
