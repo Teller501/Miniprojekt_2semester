@@ -5,6 +5,7 @@ import dk.kea.Wishlist.dto.WishFormDTO;
 import dk.kea.Wishlist.dto.WishlistFormDTO;
 import dk.kea.Wishlist.dto.WishlistWishCountDTO;
 import dk.kea.Wishlist.model.User;
+import dk.kea.Wishlist.model.Wish;
 import dk.kea.Wishlist.model.Wishlist;
 import dk.kea.Wishlist.repository.IRepository;
 import dk.kea.Wishlist.utility.LoginSampleException;
@@ -277,4 +278,21 @@ public class Controller {
 
         return "viewSharedWishlist";
     }
+
+    @GetMapping("/searchWish")
+    public String searchWish(@RequestParam("searchTerm") String searchTerm, Model model, HttpServletRequest request) {
+        long userID = (long) request.getSession().getAttribute("userID");
+        List<Long> wishlistIDs = repository.findWishlistIDsByUserIDAndWishName(userID, searchTerm);
+        if(wishlistIDs.isEmpty()) {
+            // redirect back to allwishlists page with error message
+            model.addAttribute("errorMessage", "No wish found matching search term.");
+            return "redirect:/allWishlists";
+        } else {
+            // redirect to the first wishlist ID found
+            return "redirect:/viewwishlist/" + wishlistIDs.get(0);
+        }
+    }
+
+
+
 }
