@@ -20,6 +20,16 @@ function sortByPriceDesc() {
     }).forEach(tr => wishlist[0].parentNode.appendChild(tr));
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    document.body.addEventListener('click', function(event) {
+        if (event.target.classList.contains('offcanvas-backdrop')) {
+            var offcanvasElement = document.querySelector('.offcanvas.show');
+            if (offcanvasElement) {
+                offcanvasElement.querySelector('.btn-close').click();
+            }
+        }
+    });
+});
 
 
 
