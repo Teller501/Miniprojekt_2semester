@@ -1,7 +1,6 @@
-Udkast til ER-diagram:
+### Udkast til ER-diagram:
 
 ```sql
-
 Table users {
     id integer [PK, unique, increment]
     username varchar(250) [unique, not null]
@@ -27,6 +26,16 @@ Table wish{
     description nvarchar(max)
     wishlist_id integer [ref: > wishlist.id]
 }
+
+Table shared_wishlist{
+  id integer [PK, increment]
+  uid varchar(50)
+  wishlist_id integer [ref: > wishlist.id]
+  link varchar(2083)
+}
 ``` 
 
-![erdiagram](https://user-images.githubusercontent.com/113039777/228004268-d05c3b75-cf9e-4793-a62f-abde39a81b1b.png)
+### Model udarbejdet i ```dbdiagram.io```
+
+![Wishlist](https://user-images.githubusercontent.com/113039777/231762691-56bce14e-ca6c-4355-8e6d-2fa45cac4227.png)
+

@@ -2,6 +2,14 @@ function goBack() {
     window.history.back();
 }
 
+function copyToClipboard() {
+    var generatedLink = document.getElementById("generatedLink");
+    generatedLink.select();
+    document.execCommand("copy");
+    alert("Link copied to clipboard: " + generatedLink.value);
+}
+
+
 function sortByPriceAsc() {
     const wishlist = document.querySelectorAll("tr");
     Array.from(wishlist).slice(1).sort((a, b) => {
@@ -19,5 +27,17 @@ function sortByPriceDesc() {
         return priceB - priceA;
     }).forEach(tr => wishlist[0].parentNode.appendChild(tr));
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.body.addEventListener('click', function(event) {
+        if (event.target.classList.contains('offcanvas-backdrop')) {
+            var offcanvasElement = document.querySelector('.offcanvas.show');
+            if (offcanvasElement) {
+                offcanvasElement.querySelector('.btn-close').click();
+            }
+        }
+    });
+});
+
 
 

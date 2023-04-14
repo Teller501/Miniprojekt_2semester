@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Wishify edit your wish</title>
+  <title>Wishify view your wishlist</title>
   <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
@@ -12,21 +12,22 @@
   <script th:src="@{/main.js}" src="/static/main.js"></script>
 </head>
 <body>
-
 <nav class="navbar sticky-lg-top  p-3">
   <p class="position-absolute top-0 end-0 p-1 text-muted" style="font-size: small">Logged in as:
     <a href="/editUser" th:text="' '+${username}"></a>
   </p>
   <div class="container-fluid">
     <a class="navbar-brand" href="/main">
-      <img th:src="@{~/images/logo.png}" alt="Logo" width="220px" class="d-inline-block align-text-top">
+      <img src="../src/main/resources/static/images/logo.png" th:src="@{images/logo.png}" alt="Logo" width="220px"
+           class="d-inline-block align-text-top">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
             aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="offcanvas offcanvas-end offcanvas-animation" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">            <div class="offcanvas-header">
-      <img th:src="@{~/images/logo.png}" alt="Logo" width="220px" class="d-inline-block align-text-top">
+      <img src="../src/main/resources/static/images/logo.png" th:src="@{images/logo.png}" alt="Logo"
+           width="120px" class="d-inline-block align-text-top">
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
       <div class="offcanvas-body">
@@ -70,35 +71,35 @@
 
 <div class="container-fluid mt-5 text-center">
   <div class="container p-3 mt-4">
-    <h3>Edit the wish details:</h3>
-    <form method="post" th:action="@{/editWish}" th:object="${wish}">
-        <input type="hidden" th:field="*{id}"/>
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="floatingInput" name="name" th:value="*{name}">
-        <label for="floatingInput">Name of the wish:</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="linkInput" name="link" th:value="*{link}">
-        <label for="floatingInput">Link to the wish:</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="priceInput" name="price" th:value="*{price}">
-        <label for="floatingInput">Price:</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="descriptionInput" name="description" th:value="*{description}">
-        <label for="floatingInput">Description:</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control" id="qtyInput" name="link" th:value="*{qty}">
-        <label for="floatingInput">Amount:</label>
-      </div>
+    <div class="container-fluid text-center">
+      <table class="table table-striped mt-5">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Link</th>
+          <th scope="col">
+            Price
+            <a href="#" onclick="sortByPriceAsc()"><i class="fa fa-arrow-up"></i></a>
+            <a href="#" onclick="sortByPriceDesc()"><i class="fa fa-arrow-down"></i></a>
+          </th>
+          <th scope="col">Description</th>
+          <th scope="col">Amount</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
 
-      <div class="mt-5">
-        <input type="submit" value="Update" class="btn btn-outline-success m-2"/>
-        <input type="reset" value="Reset" class="btn btn-outline-danger m-2"/>
-      </div>
-    </form>
+        <tr th:each="wish : ${wishlist}">
+          <td th:text="${wish.name}"></td>
+          <td>
+            <a th:href="${wish.link}" target="_blank">Click here</a>
+          </td>
+          <td th:text="${wish.price} + ' kr.'"></td>
+          <td th:text="${wish.description}"></td>
+          <td th:text="${wish.qty}"></td>
+        </tr>
+
+      </table>
+
+    </div>
   </div>
 </div>
 

@@ -44,4 +44,10 @@ public interface IRepository {
     long getWishlistOwnerId(int wishlist_id);
 
     void editWish(WishFormDTO wish);
+
+    void createShareLink(int id, String uid, String shareLink);
+
+
+    int getWishlistIDByUID(String uid);
+
 }
