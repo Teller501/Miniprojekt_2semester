@@ -52,13 +52,20 @@ Users can add items from any website to their wishlist using a browser extension
 
 ### Technical Requirements
 
+The wishlist application will be a web-based application built using the following technical requirements:
+
+Programming language: Java
+Framework: Spring Boot
+Web server: Apache Tomcat
+Database: Planetscale
+Front-end: HTML, CSS (With the help from Bootstrap), and Thymeleaf
+
 ## Data Analysis
 
 ### Technical Feasibility
+The technical feasibility of the wishlist application is high due to the availability of well-established and widely used technologies for web development. The use of Java and Spring Boot framework provides a solid foundation for building scalable and robust applications. Apache Tomcat provides a reliable web server platform for hosting the application. MySQL is a widely used and proven database management system, providing efficient data storage and retrieval. Thymeleaf is a popular templating engine for creating dynamic HTML pages. Git enables efficient version control and collaboration among developers. IntelliJ IDEA, an advanced integrated development environment for Java, was used to develop the Wishlist application. 
 
-### Schedule Feasibility
-
-### Economic Feasibility
+The technical requirements and technologies chosen for this project are highly suitable for creating a functional and scalable web application. The developers involved in the project have experience with the selected technologies, and there is ample documentation and community support available for troubleshooting and optimization. Therefore, the technical feasibility of the wishlist application is high.
 
 ## Identify Alternatives
 
