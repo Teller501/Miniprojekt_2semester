@@ -5,7 +5,6 @@ import dk.kea.Wishlist.dto.WishFormDTO;
 import dk.kea.Wishlist.dto.WishlistFormDTO;
 import dk.kea.Wishlist.dto.WishlistWishCountDTO;
 import dk.kea.Wishlist.model.User;
-import dk.kea.Wishlist.model.Wish;
 import dk.kea.Wishlist.model.Wishlist;
 import dk.kea.Wishlist.repository.IRepository;
 import dk.kea.Wishlist.utility.LoginSampleException;
@@ -218,7 +217,7 @@ public class Controller {
         return "redirect:/allWishlists";
     }
 
-    @GetMapping("/viewwishlist/{id}")
+    @GetMapping("/viewWishlist/{id}")
     public String viewWishlist(@PathVariable("id") int id, Model model, HttpServletRequest request) {
         // Finds wishlist by id
         List<WishFormDTO> wishlist = repository.getWishlistByID(id);
@@ -239,7 +238,7 @@ public class Controller {
         }
 
         model.addAttribute("wishlist", wishlist);
-        return "viewwishlist";
+        return "viewWishlist";
     }
 
     @GetMapping("shareWishlist/{id}")
@@ -289,7 +288,7 @@ public class Controller {
             return "redirect:/allWishlists";
         } else {
             // redirect to the first wishlist ID found
-            return "redirect:/viewwishlist/" + wishlistIDs.get(0);
+            return "redirect:/viewWishlist/" + wishlistIDs.get(0);
         }
     }
 
