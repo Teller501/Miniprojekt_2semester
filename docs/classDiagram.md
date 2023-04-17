@@ -215,9 +215,6 @@ class WishlistWishCountDTO {
   + setId(int) void
   + getName() String
 }
-class testrepository {
-  + getTest() List~String~
-}
 
 DBRepository  -->  IRepository 
 Controller --> IRepository
