@@ -69,4 +69,11 @@ The technical requirements and technologies chosen for this project are highly s
 
 ## Identify Alternatives
 
+ Some potential alternatives to Wishify could include:
+
+1. Traditional gift-giving methods such as asking friends and family for suggestions or browsing physical stores.
+2. Other gift suggestion websites or apps that are currently available on the market (See ```Competition``` for reference).
+3. Social media platforms that allow users to create and share gift ideas and wishlists.
+
 ## Make a Decision
+We decided to create a web application instead of a mobile app for Wishify. This is because a web application can be used on any device with an internet connection, making it accessible to a wider range of users. It is also less expensive to develop and maintain compared to a mobile app, as it does not require specialized development for different platforms. Since Wishify is focused on providing wishlists, a web application is the best fit for our users' behavior.
