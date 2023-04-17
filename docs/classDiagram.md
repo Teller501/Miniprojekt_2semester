@@ -219,7 +219,7 @@ class testrepository {
   + getTest() List~String~
 }
 
-DBRepository  ..>  IRepository 
+DBRepository  -->  IRepository 
 Controller --> IRepository
 IRepository --> DBRepository
 DBManager --> DBRepository
